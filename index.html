@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Properties &amp; Partners — Fotobingo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Palett matchad mot brollopsmenyn: ivory, eucalyptus, guld, blush */
+    /* Neutral foretagspalett - byts nar varumarkesfargerna kommit */
+    --ink: #17191b; --paper: #f1efec; --card: #ffffff; --plum: #17191b;
+    --rose: #8b8781; --gold: #a4917a; --leaf: #4a4d50; --blush: #ded8d0;
+    --line: #e2ded8;
+    --shadow: 0 8px 28px rgba(23,25,27,.10);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body { font-family: 'Poppins', system-ui, sans-serif; font-weight: 300; color: var(--ink);
+    background:
+      radial-gradient(60% 40% at 0% 0%, rgba(23,25,27,.07), transparent 70%),
+      radial-gradient(50% 35% at 100% 0%, rgba(164,145,122,.13), transparent 70%),
+      radial-gradient(120% 80% at 50% -10%, #f7f5f2 0%, var(--paper) 55%) fixed;
+    min-height: 100dvh; line-height: 1.5; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px calc(40px + env(safe-area-inset-bottom)); }
+  .view { display: none; animation: rise .45s ease both; }
+  .view.active { display: block; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .view, .tile, .cell { animation: none !important; transition: none !important; } }
+  .eyebrow { font-size: .7rem; letter-spacing: .34em; text-transform: uppercase; color: var(--rose); font-weight: 500; text-align: center; }
+  .names { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.1rem, 9vw, 3.1rem); line-height: 1.1; letter-spacing: .01em; text-align: center; margin: .1em 0 0; color: var(--plum); }
+  .names .amp { color: var(--gold); font-size: 1em; margin: 0 .18em; font-style: italic; }
+  .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .2em 0 0; letter-spacing: .03em; }
+  .logo { display: block; width: 88px; height: 88px; margin: 0 auto 16px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 20px rgba(23,25,27,.16); }
+  .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
+  .gdpr { text-align: center; color: #8b8781; font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
+  .lede { text-align: center; color: #65605a; max-width: 32ch; margin: 0 auto 28px; font-size: .95rem; }
+  .btn { display: block; width: 100%; border: 0; cursor: pointer; font-family: 'Poppins'; font-size: .98rem; font-weight: 500; letter-spacing: .02em; padding: 16px 20px; border-radius: 999px; background: var(--plum); color: #fff; box-shadow: var(--shadow); transition: transform .12s ease, background .2s; }
+  .btn:active { transform: scale(.97); }
+  .btn.ghost { background: transparent; color: var(--plum); box-shadow: none; border: 1.5px solid var(--line); margin-top: 12px; }
+  .section-head { text-align: center; margin: 8px 0 22px; }
+  .section-head h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.9rem; color: var(--plum); margin: 0 0 4px; }
+  .section-head p { color: #6b5d4c; margin: 0; font-size: .95rem; }
+  .tables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tile { aspect-ratio: 1; border: 0; cursor: pointer; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: transform .12s ease; border: 1px solid var(--line); }
+  .tile:active { transform: scale(.95); }
+  .tile.full { background: linear-gradient(135deg,#fff7e6,#fffdf8); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), var(--shadow); }
+  .tile.full .num { color: var(--gold); }
+  .tile.full::after { content: "\2605 KLAR"; position: absolute; top: 6px; right: 8px; font-size: .52rem; font-weight: 700; letter-spacing: .08em; color: var(--gold); }
+  .tile { position: relative; }
+  .tile.haspic { background-position: center; background-size: cover; }
+  .tile .pname { font-family: 'Poppins'; font-weight: 600; font-size: .95rem; line-height: 1.25; color: var(--plum); padding: 0 4px; }
+  .tile.haspic .pname,
+  .tile.haspic .num, .tile.haspic .lbl { color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.65); }
+  .extra-actions { display: flex; gap: 10px; margin-top: 14px; }
+  .extra-actions label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; font-size: .88rem; font-weight: 600; padding: 13px 10px; border-radius: 999px; background: transparent; color: var(--plum); border: 1.5px solid var(--line); box-shadow: none; }
+  .extra-actions label:active { transform: scale(.97); }
+  .extra-actions input { display: none; }
+  #toast button { pointer-events: auto; margin-left: auto; flex-shrink: 0; border: 0; border-radius: 999px; padding: 13px 20px; font: inherit; font-size: .95rem; font-weight: 700; background: var(--gold); color: #fff; cursor: pointer; }
+  #lightbox .lb-save { position: fixed; top: 14px; left: 14px; height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: rgba(255,255,255,.14); color: #fff; font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
+  #wallFilter { border: 1.5px solid var(--line); background: var(--card); color: var(--plum); font-family: 'Poppins'; font-size: .8rem; font-weight: 600; padding: 7px 10px; border-radius: 999px; -webkit-appearance: none; appearance: none; }
+  .float-action { display: none; position: fixed; bottom: max(16px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 60; width: min(320px, 78vw); }
+  .float-action label { display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; font-size: .92rem; font-weight: 600; padding: 14px 18px; border-radius: 999px; background: var(--plum); color: #fff; box-shadow: 0 10px 30px rgba(23,25,27,.3); }
+  .float-action label:active { transform: scale(.97); }
+  .float-action input { display: none; }
+  body.on-wall .float-action { display: block; }
+  #view-wall .wall { padding-bottom: 96px; }
+  #lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(18,19,21,.94); display: none; align-items: center; justify-content: center; padding: 4vw; }
+  #lightbox.show { display: flex; }
+  #lightbox img { max-width: 100%; max-height: 82vh; border-radius: 14px; box-shadow: 0 24px 80px rgba(0,0,0,.5); }
+  #lightbox .lb-cap { position: fixed; bottom: 4vh; left: 0; right: 0; text-align: center; color: #f0edea; font-size: .9rem; padding: 0 6vw; }
+  #lightbox .lb-cap .b { color: #bdb6ac; font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; margin-top: 3px; }
+  #lightbox .lb-close { position: fixed; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
+  #celebrate { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; pointer-events: none; overflow: hidden; }
+  #celebrate.show { display: flex; }
+  #celebrate .cel-card { background: rgba(48,54,45,.94); color: #fff; padding: 26px 34px; border-radius: 22px; text-align: center; animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+  #celebrate .cel-emoji { font-size: 3rem; }
+  #celebrate .cel-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; color: #c6b499; margin-top: 6px; }
+  @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .confetti { position: fixed; top: -20px; width: 10px; height: 14px; border-radius: 2px; opacity: .9; animation: fall 3.6s linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(600deg); opacity: 1; } }
+  .tile .num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--plum); line-height: 1; }
+  .tile .lbl { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rose); }
+  .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .back { border: 0; background: none; font-size: 1.4rem; cursor: pointer; color: var(--plum); padding: 4px 8px; border-radius: 10px; }
+  .topbar .ttl { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.3rem; color: var(--plum); flex: 1; }
+  .topbar .wall-link { font-size: .82rem; color: var(--rose); font-weight: 600; cursor: pointer; border: 0; background: none; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cell { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); cursor: pointer; display: block; transition: transform .12s ease; }
+  .cell:active { transform: scale(.96); }
+  .cell input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+  .cell .task { position: absolute; inset: 0; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .72rem; font-weight: 500; color: #6b5d4c; }
+  .cell .cam { position: absolute; bottom: 6px; right: 6px; width: 22px; height: 22px; opacity: .35; }
+  .cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .cell.done .task, .cell.done .cam { display: none; }
+  .cell.done::after { content: "\2713"; position: absolute; top: 6px; left: 8px; font-size: 1rem; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); font-weight: 700; }
+  .cell .banner { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px 7px; background: linear-gradient(to top, rgba(18,19,21,.85), rgba(43,33,24,0)); color: #fff; font-size: .62rem; font-weight: 600; line-height: 1.2; text-align: center; display: none; }
+  .cell.done .banner { display: block; }
+  .cell .count { position: absolute; bottom: 6px; right: 6px; background: var(--plum); color: #fff; font-size: .68rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+  .cell.locked { background: #eae6e0; border-style: dashed; cursor: default; box-shadow: none; }
+  .cell.locked:active { transform: none; }
+  .cell.locked .cam { display: none; }
+  .cell.locked .task { flex-direction: column; gap: 5px; color: #9a958e; }
+  .cell.locked .lockicon { font-size: 1.35rem; opacity: .55; }
+  .cell.locked .locktime { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+  #unlockBar { text-align: center; font-size: .78rem; font-weight: 600; color: var(--rose); margin: 0 0 12px; min-height: 1.1em; }
+  .wall-filters { display: flex; gap: 8px; margin-bottom: 14px; }
+  .wall-filters select { flex: 1; min-width: 0; border: 1.5px solid var(--line); background: var(--card); color: var(--plum); font-family: 'Poppins'; font-size: .8rem; font-weight: 600; padding: 9px 10px; border-radius: 999px; -webkit-appearance: none; appearance: none; text-overflow: ellipsis; }
+  .cell.pending { opacity: .6; }
+  .cell.pending::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(20,50,74,.06) 8px, rgba(20,50,74,.06) 16px); }
+  .wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .post { border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .post img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .post .meta { padding: 8px 10px; }
+  .post .meta .t { font-size: .76rem; font-weight: 600; color: var(--plum); line-height: 1.25; }
+  .post .meta .b { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); margin-top: 2px; }
+
+  .wall-empty { text-align: center; color: #8b8781; padding: 40px 0; grid-column: 1 / -1; }
+  .toast { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); width: calc(100vw - 28px); max-width: 560px; display: flex; align-items: center; gap: 12px; background: var(--ink); color: #fff; padding: 16px 18px; border-radius: 18px; font-size: 1rem; box-shadow: 0 14px 40px rgba(23,25,27,.3); opacity: 0; transition: all .3s; pointer-events: none; z-index: 80; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .footnote { text-align: center; color: #8b8781; font-size: .78rem; margin-top: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section id="view-landing" class="view active">
+    <img class="logo" src="logo.png" alt="Properties &amp; Partners" onerror="this.remove()">
+    <p class="eyebrow">Kickoff 2026</p>
+    <h1 class="names">Properties<span class="amp">&amp;</span>Partners</h1>
+    <p class="venue">Norrk&ouml;ping &middot; 24 augusti 2026</p>
+    <hr class="rule">
+    <p class="lede">V&auml;lj ditt namn, l&ouml;s uppgifterna och fyll din bricka. Alla bilder samlas p&aring; den gemensamma v&auml;ggen.</p>
+    <button class="btn" onclick="show('tables')">V&auml;lj mitt namn</button>
+    <button class="btn ghost" onclick="openWall()">Se bildv&auml;ggen</button>
+    <p class="gdpr">Bilderna hanteras på uppdrag av Properties &amp; Partners, delas med företaget och raderas 30 dagar efter kickoffen. Deltagandet är frivilligt.</p>
+  </section>
+  <section id="view-tables" class="view">
+    <div class="section-head"><h2>Vem är du?</h2><p>Tryck p&aring; ditt namn</p></div>
+    <div id="tableGrid" class="tables"></div>
+    <p class="footnote">Valde du fel? Tryck bara p&aring; ett annat namn.</p>
+  </section>
+  <section id="view-card" class="view">
+    <div class="topbar"><button class="back" onclick="show('tables')">&larr;</button><span class="ttl" id="cardTitle">Bricka</span><button class="wall-link" onclick="openWall()">V&auml;ggen &rarr;</button></div>
+    <p id="unlockBar"></p>
+    <div id="bingoGrid" class="grid"></div>
+    <div class="extra-actions">
+      <label>&#x1F4F7; Ta en lagbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 100)"></label>
+      <label>&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
+    </div>
+    <p class="footnote">Tryck p&aring; en ruta &rarr; kameran &ouml;ppnas &rarr; fotot fyller brickan och hamnar p&aring; v&auml;ggen.<br>Ta g&auml;rna <strong>flera bilder p&aring; samma uppgift</strong> &mdash; ju fler desto roligare!</p>
+  </section>
+  <section id="view-wall" class="view">
+    <div class="topbar"><button class="back" onclick="show(lastView)">&larr;</button><span class="ttl">Bildv&auml;ggen</span></div>
+    <div class="wall-filters"><select id="filterTable" onchange="setWallFilter()"></select><select id="filterTask" onchange="setWallFilter()"></select></div>
+    <div id="wallGrid" class="wall"></div>
+  </section>
+</div>
+<div class="float-action" id="floatSpontan">
+  <label>&#x2728; Ta en spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
+</div>
+<div id="lightbox" onclick="closeLightbox()"><button class="lb-close" aria-label="St&auml;ng">&#x2715;</button><button class="lb-save" onclick="event.stopPropagation(); saveFromLightbox()">&#x1F4E5; Spara</button><img id="lbImg" alt=""><div class="lb-cap"><div class="t" id="lbTitle"></div><div class="b" id="lbTable"></div></div></div>
+<div id="toast" class="toast"></div>
+<div id="celebrate"><div class="cel-card"><div class="cel-emoji">&#x1F389;</div><div class="cel-text"></div></div></div>
+<script>
+  // ============ KONFIGURATION ============
+  const API_URL = ""; // <-- /exec-URL fran Properties & Partners EGNA Apps Script-projekt
+  // 8 deltagare. id = kort kod (anvands i filnamn), name = det som visas.
+  // Byt bara ut name-varden nar namnen kommit - ror inte id.
+  const PEOPLE = [
+    { id: "p1", name: "Deltagare 1" },
+    { id: "p2", name: "Deltagare 2" },
+    { id: "p3", name: "Deltagare 3" },
+    { id: "p4", name: "Deltagare 4" },
+    { id: "p5", name: "Deltagare 5" },
+    { id: "p6", name: "Deltagare 6" },
+    { id: "p7", name: "Deltagare 7" },
+    { id: "p8", name: "Deltagare 8" }
+  ];
+  function personName(id) {
+    const p = PEOPLE.find(x => x.id === String(id));
+    return p ? p.name : String(id);
+  }
+  const TASKS = [
+    // Rad 1 \u2014 15:00 ankomst & mingel
+    "N\u00e5gon du inte jobbat med i \u00e5r", "B\u00e4sta handslaget", "En sk\u00e5l \ud83e\udd42",
+    // Rad 2 \u2014 16:00 Norrk\u00f6ping
+    "Industrilandskapet i bakgrunden", "N\u00e4rmaste tegelfasad", "Sp\u00e5rvagnen p\u00e5 bild",
+    // Rad 3 \u2014 17:00 m\u00e4klarliv
+    "En \u201ds\u00e5ld!\u201d-pose", "N\u00e5gon mitt i sitt b\u00e4sta s\u00e4ljargument", "Dagens mest fotogeniska detalj",
+    // Rad 4 \u2014 18:00 AW
+    "Hela g\u00e4nget i en bild", "Kv\u00e4llens b\u00e4sta dansmove", "Sista sk\u00e5len \ud83c\udf7b"
+  ];
+  const POLL_MS = 4000;
+
+  // ===== TIDSSCHEMA: en rad (3 uppgifter) slapps i taget =====
+  // EVENT_START = nar forsta raden ska vara oppen. Tomt = allt oppet direkt (test).
+  const EVENT_START = "2026-08-24T15:00:00+02:00";   // rad 1 oppnar vid start
+  const RELEASE_EVERY_MIN = 60;         // 60 min mellan rader -> allt oppet 18:00
+  const ROW_SIZE = 3;                  // uppgifter per rad
+  // =======================================
+  let currentTable = null, lastView = 'landing', pollTimer = null, feed = [], pendingUploads = [];
+  function show(name) {
+    if (name !== 'wall') lastView = name;
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.body.classList.toggle('on-wall', name === 'wall');
+    document.getElementById('view-' + name).classList.add('active');
+    window.scrollTo(0, 0);
+    if (name === 'landing') { stopPolling(); }
+    else { refreshFeed(); startPolling(); }
+    if (name === 'tables') markFullTablesInPicker();
+  }
+  function toast(msg, btnText, btnFn, ms) {
+    const t = document.getElementById('toast'); t.innerHTML = msg;
+    if (btnText && btnFn) {
+      const b = document.createElement('button'); b.textContent = btnText;
+      b.onclick = ev => { ev.stopPropagation(); btnFn(); t.classList.remove('show'); };
+      t.appendChild(b);
+    }
+    t.classList.add('show');
+    clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), ms || 2600);
+  }
+  // Spara via delningsarket (iOS/Android) — originalfilen i full kvalitet
+  function canShareFile(file) {
+    return !!(navigator.canShare && file && navigator.canShare({ files: [file] }));
+  }
+  async function shareFile(file) {
+    try { await navigator.share({ files: [file] }); } catch (e) { /* användaren avbröt */ }
+  }
+  async function saveFromLightbox() {
+    const f = currentLightboxItem; if (!f) return;
+    try {
+      const res = await fetch(f.url + (f.url.indexOf('googleusercontent') > -1 ? '=s2048' : ''));
+      const blob = await res.blob();
+      const file = new File([blob], 'fotobingo.jpg', { type: blob.type || 'image/jpeg' });
+      if (canShareFile(file)) { await shareFile(file); return; }
+      throw new Error('share ej stödd');
+    } catch (e) {
+      toast('Håll fingret på bilden och välj ”Spara bild”', null, null, 4200);
+    }
+  }
+  let wallTable = 'alla', wallTask = 'alla';
+  function setWallFilter() {
+    wallTable = document.getElementById('filterTable').value;
+    wallTask = document.getElementById('filterTask').value;
+    renderWall();
+  }
+  (function () {
+    const t = document.getElementById('filterTable');
+    const a = ['<option value="alla">Alla deltagare</option>'];
+    PEOPLE.forEach(p => a.push('<option value="' + p.id + '">' + p.name + '</option>'));
+    a.push('<option value="gemensam">Gemensamt</option>');
+    t.innerHTML = a.join('');
+    const k = document.getElementById('filterTask');
+    const b = ['<option value="alla">Alla uppgifter</option>'];
+    TASKS.forEach((task, i) => b.push('<option value="' + i + '">' + task + '</option>'));
+    b.push('<option value="100">Lagbilder</option>', '<option value="101">Spontanbilder</option>');
+    k.innerHTML = b.join('');
+  })();
+  const tableGrid = document.getElementById('tableGrid');
+  PEOPLE.forEach(p => {
+    const b = document.createElement('button'); b.className = 'tile'; b.dataset.table = p.id;
+    b.innerHTML = '<span class="pname">' + p.name + '</span>';
+    b.onclick = () => openCard(p.id); tableGrid.appendChild(b);
+  });
+  const camIcon = '<svg class="cam" viewBox="0 0 24 24" fill="none" stroke="#17191b" stroke-width="2"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h0a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+  function openCard(tableNo) {
+    currentTable = tableNo;
+    document.getElementById('cardTitle').textContent = personName(tableNo);
+    renderCard(); show('card'); refreshFeed();
+  }
+  // ===== Upplasning over tid =====
+  function eventStartMs() {
+    if (!EVENT_START) return null;
+    const t = new Date(EVENT_START).getTime();
+    return isNaN(t) ? null : t;
+  }
+  function totalRows() { return Math.ceil(TASKS.length / ROW_SIZE); }
+  function releasedRows() {
+    const start = eventStartMs();
+    if (start === null) return totalRows();
+    const elapsed = Math.max(0, Date.now() - start);
+    return Math.min(totalRows(), 1 + Math.floor(elapsed / (RELEASE_EVERY_MIN * 60000)));
+  }
+  function unlockedCount() { return Math.min(TASKS.length, releasedRows() * ROW_SIZE); }
+  function rowUnlockTime(idx) {
+    const start = eventStartMs();
+    if (start === null) return null;
+    return start + Math.floor(idx / ROW_SIZE) * RELEASE_EVERY_MIN * 60000;
+  }
+  function fmtTime(ms) {
+    const d = new Date(ms);
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  function updateUnlockBar() {
+    const bar = document.getElementById('unlockBar');
+    if (!bar) return;
+    const start = eventStartMs();
+    if (start === null) { bar.textContent = ''; return; }
+    const rows = releasedRows();
+    if (rows >= totalRows()) { bar.textContent = 'Alla uppgifter \u00e4r \u00f6ppna \u2014 lycka till! \ud83c\udf89'; return; }
+    const next = start + rows * RELEASE_EVERY_MIN * 60000;
+    const minsLeft = Math.max(0, Math.round((next - Date.now()) / 60000));
+    bar.textContent = ROW_SIZE + ' nya uppgifter \u00f6ppnar ' + fmtTime(next) +
+      (minsLeft <= 60 ? ' (om ' + minsLeft + ' min)' : '');
+  }
+  function renderCard() {
+    const grid = document.getElementById('bingoGrid'); grid.innerHTML = '';
+    updateUnlockBar();
+    const unlocked = unlockedCount();
+    TASKS.forEach((task, idx) => {
+      const label = document.createElement('label'); label.className = 'cell';
+      const input = document.createElement('input');
+      input.type = 'file'; input.accept = 'image/*'; input.setAttribute('capture', 'environment');
+      const taskEl = document.createElement('span'); taskEl.className = 'task'; taskEl.textContent = task;
+      label.appendChild(taskEl); label.insertAdjacentHTML('beforeend', camIcon); label.appendChild(input);
+      if (idx >= unlocked) {
+        // Ej sl\u00e4ppt \u00e4n: doldt uppdrag, ingen kamera
+        label.classList.add('locked');
+        input.disabled = true;
+        const at = rowUnlockTime(idx);
+        taskEl.textContent = '';
+        taskEl.insertAdjacentHTML('beforeend',
+          '<span class="lockicon">\ud83d\udd12</span>' +
+          (at ? '<span class="locktime">\u00d6ppnar ' + fmtTime(at) + '</span>' : ''));
+        grid.appendChild(label);
+        return;
+      }
+      const matches = feed.concat(pendingUploads).filter(f => f.table === currentTable && f.taskIndex === idx).sort((a,b) => b.ts - a.ts);
+      if (matches.length) {
+        const img = document.createElement('img'); img.src = matches[0].url; label.appendChild(img); label.classList.add('done');
+        if (matches[0].pending) label.classList.add('pending');
+        const ban = document.createElement('span'); ban.className = 'banner'; ban.textContent = task; label.appendChild(ban);
+        if (matches.length > 1) { const c = document.createElement('span'); c.className = 'count'; c.textContent = '+' + (matches.length - 1); label.appendChild(c); }
+      }
+      input.addEventListener('change', e => {
+        const file = e.target.files && e.target.files[0]; if (!file) return;
+        const pendingItem = { table: currentTable, taskIndex: idx, url: URL.createObjectURL(file), ts: Date.now(), pending: true };
+        pendingUploads.push(pendingItem);
+        renderCard();
+        toast('Skickar\u2026 \ud83d\udce4');
+        uploadPhoto(file, currentTable, idx, pendingItem);
+      });
+      grid.appendChild(label);
+    });
+  }
+  async function uploadPhoto(file, table, taskIndex, pendingItem) {
+    if (!API_URL) { toast('Demo-l\u00e4ge: ingen server kopplad \u00e4n'); removePending(pendingItem); return; }
+    try {
+      const dataUrl = await compressImage(file);
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ table, taskIndex, task: taskLabel(taskIndex), image: dataUrl, filename: file.name })
+      });
+      const out = await res.json();
+      if (out && out.ok && out.url) {
+        feed.push({ id: out.id, table, taskIndex, url: out.url, ts: Date.now() });
+        removePending(pendingItem, true);
+        if (canShareFile(file)) toast('Bidrag tillagt! \ud83c\udf89', 'Spara till mobilen', () => shareFile(file), 6000);
+        else toast('Bidrag tillagt! \ud83c\udf89');
+      } else {
+        removePending(pendingItem);
+        toast('Uppladdning misslyckades: ' + ((out && out.error) || 'ok\u00e4nt fel'));
+      }
+    } catch (err) {
+      removePending(pendingItem);
+      toast('N\u00e5got gick fel \u2014 f\u00f6rs\u00f6k igen');
+    }
+  }
+  function removePending(item, keepUrl) {
+    if (!item) return;
+    pendingUploads = pendingUploads.filter(p => p !== item);
+    if (!keepUrl) URL.revokeObjectURL(item.url);
+    if (document.getElementById('view-card').classList.contains('active')) renderCard();
+  }
+  // Etikett f\u00f6r specialbilder (100 = bordsbild, 101 = spontanbild)
+  function taskLabel(i) {
+    if (i === 100) return 'Lagbild';
+    if (i === 101) return 'Spontanbild';
+    return TASKS[i] || '';
+  }
+  // Bordsbild/spontanbild \u2014 samma uppladdningsfl\u00f6de, eget taskIndex utanf\u00f6r po\u00e4ngr\u00e4kningen
+  function uploadExtra(inputEl, taskIndex) {
+    const file = inputEl.files && inputEl.files[0]; if (!file) return;
+    inputEl.value = '';
+    const table = currentTable || 'gemensam';
+    toast('Skickar\u2026 \ud83d\udce4');
+    uploadPhoto(file, table, taskIndex, null);
+  }
+  // Skala ner till max 1600 px och JPEG ~0.82 f\u00f6re uppladdning (10\u201320x mindre payload).
+  // Faller tillbaka p\u00e5 originalet om n\u00e5got g\u00e5r fel.
+  async function compressImage(file) {
+    const MAX = 1600, QUALITY = 0.82;
+    try {
+      if (file.size < 300 * 1024) return await fileToDataUrl(file);
+      const objUrl = URL.createObjectURL(file);
+      const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = objUrl; });
+      const scale = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.round(img.naturalWidth * scale), h = Math.round(img.naturalHeight * scale);
+      const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(objUrl);
+      const out = canvas.toDataURL('image/jpeg', QUALITY);
+      return (out && out.length > 100) ? out : await fileToDataUrl(file);
+    } catch (e) {
+      return await fileToDataUrl(file);
+    }
+  }
+  function fileToDataUrl(file) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(file); }); }
+  function openWall() { show('wall'); renderWall(); refreshFeed(); startPolling(); }
+  function renderWall() {
+    const grid = document.getElementById('wallGrid');
+    if (!feed.length) { grid.innerHTML = '<p class="wall-empty">Inga bilder \u00e4n \u2014 bli f\u00f6rst att bidra!</p>'; return; }
+    grid.innerHTML = '';
+    let items = feed.slice();
+    if (wallTable !== 'alla') items = items.filter(f => String(f.table) === wallTable);
+    if (wallTask !== 'alla') items = items.filter(f => String(f.taskIndex) === wallTask);
+    if (!items.length) { grid.innerHTML = '<p class="wall-empty">Inga bilder matchar filtret \u00e4n.</p>'; return; }
+    items.reverse().forEach(f => {
+      const post = document.createElement('div'); post.className = 'post';
+      const who = (f.table === 'gemensam') ? 'Gemensamt' : personName(f.table);
+      post.innerHTML = '<img src="' + f.url + '" loading="lazy"><div class="meta"><div class="t">' + taskLabel(f.taskIndex) + '</div><div class="b">' + who + '</div></div>';
+      post.onclick = () => openLightbox(f);
+      grid.appendChild(post);
+    });
+  }
+  let lastFeedJson = '';
+  async function refreshFeed() {
+    if (!API_URL) return;
+    try {
+      const res = await fetch(API_URL + '?action=list'); const out = await res.json();
+      if (Array.isArray(out.items)) {
+        // Rendera bara om n\u00e4r datan faktiskt \u00e4ndrats \u2014 annars flimrar bilderna vid varje poll
+        const j = JSON.stringify(out.items);
+        if (j === lastFeedJson) return;
+        lastFeedJson = j;
+        feed = out.items;
+        updateFullTables();
+        if (document.getElementById('view-wall').classList.contains('active')) renderWall();
+        if (document.getElementById('view-card').classList.contains('active')) renderCard();
+        if (document.getElementById('view-tables').classList.contains('active')) markFullTablesInPicker();
+      }
+    } catch (e) {}
+  }
+  // ---- Fulla bord: beräkning, markering och firande ----
+  let fullTables = new Set();
+  let celebrated = new Set(JSON.parse(localStorage.getItem('fotobingo_celebrated_pp2026') || '[]'));
+  function computeFull() {
+    const solved = {};
+    feed.forEach(f => { if (f.taskIndex >= TASKS.length) return; (solved[f.table] = solved[f.table] || new Set()).add(f.taskIndex); });
+    const s = new Set();
+    Object.keys(solved).forEach(t => { if (solved[t].size >= TASKS.length) s.add(String(t)); });
+    return s;
+  }
+  function updateFullTables() {
+    const prev = fullTables;
+    fullTables = computeFull();
+    // Nyss blivet fullt (som vi inte firat än)?
+    fullTables.forEach(t => {
+      if (!prev.has(t) && !celebrated.has(t)) {
+        celebrated.add(t); localStorage.setItem('fotobingo_celebrated_pp2026', JSON.stringify([...celebrated]));
+        celebrate(t);
+      }
+    });
+    markFullTablesInPicker();
+  }
+  function markFullTablesInPicker() {
+    document.querySelectorAll('#tableGrid .tile').forEach(tile => {
+      tile.classList.toggle('full', fullTables.has(String(tile.dataset.table)));
+      // Senaste lagbilden (taskIndex 100) som bakgrund pa namnbrickan
+      const pics = feed.filter(f => String(f.table) === String(tile.dataset.table) && f.taskIndex === 100).sort((a,b) => b.ts - a.ts);
+      if (pics.length) {
+        tile.classList.add('haspic');
+        tile.style.backgroundImage = 'linear-gradient(rgba(18,19,21,.25), rgba(18,19,21,.5)), url(' + JSON.stringify(pics[0].url) + ')';
+      } else {
+        tile.classList.remove('haspic');
+        tile.style.backgroundImage = '';
+      }
+    });
+  }
+  function celebrate(tableNo) {
+    const layer = document.getElementById('celebrate');
+    layer.querySelector('.cel-text').textContent = personName(tableNo) + ' har full bricka!';
+    layer.classList.add('show');
+    // konfetti
+    const colors = ['#c4a35a','#6e3b4e','#c97b6b','#6f7d5a','#c6b499'];
+    for (let i = 0; i < 90; i++) {
+      const c = document.createElement('span'); c.className = 'confetti';
+      c.style.left = Math.random()*100 + 'vw';
+      c.style.background = colors[i % colors.length];
+      c.style.animationDelay = (Math.random()*0.6) + 's';
+      c.style.transform = 'rotate(' + (Math.random()*360) + 'deg)';
+      layer.appendChild(c);
+      setTimeout(() => c.remove(), 4000);
+    }
+    setTimeout(() => layer.classList.remove('show'), 4200);
+  }
+  let currentLightboxItem = null;
+  function openLightbox(f) {
+    currentLightboxItem = f;
+    const img = document.getElementById('lbImg');
+    img.onerror = () => { img.onerror = null; img.src = f.url; }; // fallback till standardstorlek
+    img.src = (f.url.indexOf('googleusercontent') > -1) ? f.url + '=s1600' : f.url;
+    document.getElementById('lbTitle').textContent = taskLabel(f.taskIndex);
+    document.getElementById('lbTable').textContent = (f.table === 'gemensam') ? 'Gemensamt' : personName(f.table);
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+    document.getElementById('lbImg').src = '';
+  }
+  // Kollar var 20:e sekund om en ny rad slappts (feed-pollen renderar bara vid andrad data)
+  let lastUnlocked = unlockedCount();
+  setInterval(() => {
+    const u = unlockedCount();
+    updateUnlockBar();
+    if (u !== lastUnlocked) {
+      const added = u - lastUnlocked;
+      lastUnlocked = u;
+      if (document.getElementById('view-card').classList.contains('active')) {
+        renderCard();
+        toast(added + ' nya uppgifter uppl\u00e5sta! \ud83c\udf89', null, null, 6000);
+      }
+    }
+  }, 20000);
+  function startPolling() { stopPolling(); pollTimer = setInterval(refreshFeed, POLL_MS); }
+  function stopPolling() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+</script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="sv"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Properties &amp; Partners — Poängställning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#17191b; --paper:#f1efec; --card:#ffffff; --plum:#17191b; --rose:#8b8781; --gold:#a4917a; --leaf:#4a4d50; --blush:#ded8d0; --line:#e2ded8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family:'Poppins',system-ui,sans-serif; font-weight:300; color:var(--ink);
+    background:
+      radial-gradient(45% 45% at 0% 0%, rgba(23,25,27,.07), transparent 70%),
+      radial-gradient(40% 40% at 100% 0%, rgba(164,145,122,.13), transparent 70%),
+      radial-gradient(130% 90% at 50% -10%, #f7f5f2 0%, var(--paper) 55%) fixed;
+    height:100vh; padding: 2.2vh 3.5vw; overflow:hidden; cursor:none; display:flex; flex-direction:column; }
+  header { text-align:center; margin-bottom: 1.6vh; flex:none; }
+  .eyebrow { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,3vh,2.2rem); letter-spacing:.02em; text-transform:none; color:var(--plum); font-weight:600; line-height:1; }
+  .sb-logo { display:block; height:clamp(38px,7vh,74px); width:auto; margin:0 auto .8vh; border-radius:10px; }
+  .venue { font-size:clamp(.62rem,1.4vh,.95rem); letter-spacing:.2em; text-transform:uppercase; font-weight:500; color:var(--rose); margin-top:.5em; }
+  h1 { font-family:'Cormorant Garamond',serif; font-weight:700; font-size: clamp(2rem, 7vh, 5.5rem); color:var(--plum); line-height:1; margin-top:.1em; }
+  .layout { display:grid; grid-template-columns: var(--split, 57%) 1fr; gap: 3vw; align-items:stretch; flex:1; min-height:0; }
+  .layout section { display:flex; flex-direction:column; min-height:0; }
+  @media (max-width: 900px){ .layout{ grid-template-columns:1fr; } }
+
+  /* ---------- TWEAKS ---------- */
+  #tweakBtn { position:fixed; top:1.5vh; right:1.5vw; z-index:50; cursor:pointer;
+    width:2.6em; height:2.6em; border-radius:999px; border:1px solid var(--line);
+    background:var(--card); color:var(--plum); font-size:1rem; display:flex; align-items:center;
+    justify-content:center; box-shadow:0 6px 18px rgba(43,33,24,.12); opacity:.35; transition:opacity .25s ease; }
+  #tweakBtn:hover { opacity:1; }
+  #tweakPanel { position:fixed; top:6vh; right:1.5vw; z-index:50; width:min(320px,86vw); cursor:auto;
+    background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px;
+    box-shadow:0 18px 46px rgba(43,33,24,.22); display:none; }
+  #tweakPanel.open { display:block; }
+  #tweakPanel h3 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.15rem; color:var(--plum); margin-bottom:2px; }
+  #tweakPanel .sub { font-size:.82rem; color:#8a7c68; margin-bottom:16px; }
+  #tweakPanel .field label { display:flex; justify-content:space-between; font-size:.85rem; font-weight:700; color:var(--plum); margin-bottom:8px; }
+  #tweakPanel .field label span { color:var(--rose); }
+  #tweakPanel input[type=range] { width:100%; accent-color:var(--rose); cursor:pointer; }
+  #tweakPanel .ends { display:flex; justify-content:space-between; font-size:.72rem; color:#9b8d79; margin-top:4px; }
+  #tweakPanel .reset { margin-top:16px; width:100%; padding:9px; border:1px solid var(--line); border-radius:10px;
+    background:transparent; color:var(--plum); font-weight:700; font-size:.82rem; cursor:pointer; font-family:inherit; }
+  #tweakPanel .reset:hover { background:#f3ead9; }
+  .panel-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size: clamp(1.1rem,3vh,2rem); color:var(--plum); margin-bottom:1.2vh; flex:none; display:flex; align-items:center; gap:.5em; }
+
+  /* ---------- LEADERBOARD ---------- */
+  #board { display:flex; flex-direction:column; gap:1vh; flex:1; min-height:0; }
+  .row { position:relative; display:flex; align-items:center; gap:1.4vw; background:var(--card);
+    border:1px solid var(--line); border-radius:16px; padding:.6vh 1.6vw;
+    box-shadow:0 6px 20px rgba(23,25,27,.07); overflow:hidden; flex:1 1 0; min-height:0; }
+  .row .rank { font-family:'Cormorant Garamond',serif; font-weight:700; font-size: clamp(1.1rem,4.2vh,3.2rem);
+    color:var(--rose); width:1.6em; text-align:center; flex:none; line-height:1; }
+  .row .rank .medal { font-size:1.05em; }
+  .row .who { flex:1; min-width:0; }
+  .row .who .name { font-weight:700; font-size: clamp(.95rem,3vh,2.3rem); color:var(--plum); display:flex; align-items:center; gap:.5em; flex-wrap:wrap; }
+  .row .who .detail { font-size: clamp(.7rem,1.9vh,1.2rem); color:#65605a; margin-top:.2em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row .pts { font-family:'Cormorant Garamond',serif; font-weight:700; font-size: clamp(1.2rem,4.6vh,3.4rem); color:var(--plum); flex:none; line-height:1; text-align:right; }
+  .row .pts small { font-size:.32em; font-weight:600; color:var(--rose); display:block; text-align:right; letter-spacing:.12em; text-transform:uppercase; margin-top:.3em; }
+
+  /* progress bar */
+  .bar { height:.55em; background:#e8e4de; border-radius:999px; margin-top:.4em; overflow:hidden; }
+  .bar-fill { height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--rose),var(--gold)); transition:width 1s cubic-bezier(.2,.8,.2,1); }
+
+  /* pills */
+  .badge-full { font-size:.5em; background:var(--leaf); color:#fff; padding:.25em .7em; border-radius:999px; font-weight:700; letter-spacing:.05em; }
+  .lead-pill { font-size:.5em; background:var(--gold); color:#fff; padding:.25em .7em; border-radius:999px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; animation:leadpop .6s ease both; }
+  @keyframes leadpop { from{ transform:scale(.6); opacity:0;} to{ transform:scale(1); opacity:1;} }
+
+  /* leader treatment */
+  .row.top1 { background: linear-gradient(105deg,#fff4dc,#fffdf8);
+    border-color: var(--gold); box-shadow:0 12px 34px rgba(164,145,122,.28);
+    }
+  .row.top1 .rank { color: var(--gold); }
+  .row.top1 .bar-fill { background:linear-gradient(90deg,var(--gold),#e6c877); }
+  /* glint sweep across the leader */
+  .row.top1::after { content:""; position:absolute; top:0; left:-60%; width:45%; height:100%;
+    background:linear-gradient(100deg,transparent, rgba(255,255,255,.75), transparent);
+    transform:skewX(-18deg); animation:glint 4.5s ease-in-out infinite; pointer-events:none; }
+  @keyframes glint { 0%{ left:-60%; } 30%,100%{ left:140%; } }
+  .crown { position:absolute; top:-.55em; left:.55em; font-size:clamp(1.1rem,2.2vw,2rem); transform:rotate(-14deg); filter:drop-shadow(0 3px 4px rgba(43,33,24,.2)); }
+
+  /* ---------- FOTOSNURRA ---------- */
+  .photostage { position:relative; width:100%; flex:1; min-height:0; display:flex; justify-content:center; align-items:flex-start; }
+  .deck { position:relative; width:min(100%, 58vh); }
+  .deck::before { content:""; display:block; padding-top:118%; }  /* reserve polaroid height */
+  .stack-back { position:absolute; inset:0; background:var(--card); border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 22px rgba(43,33,24,.10); }
+  .back1 { transform:rotate(4deg) translateY(1.2%); }
+  .back2 { transform:rotate(-5deg) translateY(2.4%); }
+  .polaroid { position:absolute; inset:0; background:#fffef9; border-radius:10px;
+    padding:5% 5% 0; box-shadow:0 16px 40px rgba(43,33,24,.20); transform:rotate(-1.2deg);
+    display:flex; flex-direction:column; animation:dealin .7s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes dealin { from{ opacity:0; transform:rotate(6deg) translateY(-14px) scale(.94);} to{ opacity:1; transform:rotate(-1.2deg) translateY(0) scale(1);} }
+  .window { position:relative; width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:4px; background:#e7ddca; }
+  .window img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0;
+    transition:opacity .9s ease; will-change:transform,opacity; }
+  .window img.on { opacity:1; animation:kenburns 7s ease-out both; }
+  @keyframes kenburns { from{ transform:scale(1.02);} to{ transform:scale(1.12) translate(-1%,-1.5%);} }
+  .pcap { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:.5em .2em; }
+  .pcap .t { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.1rem,2.4vw,2.1rem); color:var(--plum); line-height:1.05; transition:opacity .35s ease; }
+  .pcap .b { font-size:clamp(.7rem,1vw,.95rem); color:var(--rose); text-transform:uppercase; letter-spacing:.1em; font-weight:700; margin-top:.25em; transition:opacity .35s ease; }
+  .pcap.fade .t, .pcap.fade .b { opacity:0; }
+
+  .empty { color:#9b8d79; padding:30px 0; text-align:center; }
+  .pulse { position:fixed; bottom:2vh; right:2vw; font-size:.8rem; color:#bcae9c; }
+</style>
+</head>
+<body>
+  
+  <header>
+    <img class="sb-logo" src="logo.png" alt="" onerror="this.remove()">
+    <div class="eyebrow">Properties &amp; Partners</div>
+    <div class="venue">Kickoff &middot; Norrk&ouml;ping &middot; 24 augusti 2026</div>
+    <h1>Poängställning</h1>
+  </header>
+  <div class="layout">
+    <section>
+      <div class="panel-title">🏆 Deltagare</div>
+      <div id="board"><p class="empty">Väntar på poäng…</p></div>
+    </section>
+    <section>
+      <div class="panel-title">📸 Från kvällen</div>
+      <div class="photostage">
+        <div class="deck" id="deck">
+          <div class="stack-back back2"></div>
+          <div class="stack-back back1"></div>
+          <div class="polaroid" id="polaroid" style="display:none">
+            <div class="window">
+              <img id="imgA" alt="">
+              <img id="imgB" alt="">
+            </div>
+            <div class="pcap" id="pcap">
+              <div class="t" id="pcapT"></div>
+              <div class="b" id="pcapB"></div>
+            </div>
+          </div>
+          <p class="empty" id="photoEmpty" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">Inga bilder än</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="pulse" id="pulse">🔄 uppdaterar var 5:e sekund</div>
+
+  <div id="tweakBtn" title="Inställningar">⚙️</div>
+  <div id="tweakPanel">
+    <h3>Layout</h3>
+    <div class="sub">Justera hur ytan fördelas mellan poäng och bilder.</div>
+    <div class="field">
+      <label>Fördelning <span id="splitLbl">57% / 43%</span></label>
+      <input type="range" id="splitRange" min="30" max="65" step="1" value="57">
+      <div class="ends"><span>Mer bilder</span><span>Mer poäng</span></div>
+    </div>
+    <button class="reset" id="splitReset">Återställ</button>
+  </div>
+<script>
+  // Samma /exec-URL som i index.html:
+  const API_URL = ""; // <-- samma /exec-URL som i index.html // <-- SAMMA /exec-URL som i index.html
+  const TASKS = [
+    "N\u00e5gon du inte jobbat med i \u00e5r","B\u00e4sta handslaget","En sk\u00e5l \ud83e\udd42",
+    "Industrilandskapet i bakgrunden","N\u00e4rmaste tegelfasad","Sp\u00e5rvagnen p\u00e5 bild",
+    "En \u201ds\u00e5ld!\u201d-pose","N\u00e5gon mitt i sitt b\u00e4sta s\u00e4ljargument","Dagens mest fotogeniska detalj",
+    "Hela g\u00e4nget i en bild","Kv\u00e4llens b\u00e4sta dansmove","Sista sk\u00e5len \ud83c\udf7b"
+  ];
+  // Samma id/namn-lista som i index.html - hall dem identiska
+  const PEOPLE = [
+    { id: "p1", name: "Deltagare 1" }, { id: "p2", name: "Deltagare 2" },
+    { id: "p3", name: "Deltagare 3" }, { id: "p4", name: "Deltagare 4" },
+    { id: "p5", name: "Deltagare 5" }, { id: "p6", name: "Deltagare 6" },
+    { id: "p7", name: "Deltagare 7" }, { id: "p8", name: "Deltagare 8" }
+  ];
+  function personName(id) {
+    const p = PEOPLE.find(x => x.id === String(id));
+    return p ? p.name : String(id);
+  }
+  const POLL_MS = 5000;
+
+  function taskLabel(i) {
+    if (i === 100) return 'Lagbild';
+    if (i === 101) return 'Spontanbild';
+    return TASKS[i] || '';
+  }
+  function whoLabel(t) { return (t === 'gemensam') ? 'Gemensamt' : personName(t); }
+
+  let lastScoresJson = '';
+  async function refresh() {
+    try {
+      const res = await fetch(API_URL + '?action=score');
+      const out = await res.json();
+      if (out.scores) {
+        const j = JSON.stringify(out.scores);
+        if (j !== lastScoresJson) { lastScoresJson = j; renderBoard(out.scores); }
+      }
+      if (out.items) renderPhotos(out.items);
+    } catch (e) {}
+  }
+
+  /* =================== LEADERBOARD =================== */
+  const MEDALS = ['\uD83E\uDD47','\uD83E\uDD48','\uD83E\uDD49'];
+  let prevPoints = {};
+
+  function countUp(eln, from, to) {
+    const dur = 850, start = performance.now();
+    function tick(t) {
+      const p = Math.min(1, (t - start) / dur);
+      const v = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
+      eln.textContent = v;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function renderBoard(scores) {
+    const el = document.getElementById('board');
+    if (!scores.length) { el.innerHTML = '<p class="empty">V\u00e4ntar p\u00e5 po\u00e4ng\u2026</p>'; prevPoints = {}; return; }
+
+    // FLIP: fånga gamla positioner
+    const oldRects = {};
+    el.querySelectorAll('.row').forEach(r => { oldRects[r.dataset.table] = r.getBoundingClientRect().top; });
+
+    const maxPts = Math.max.apply(null, scores.map(s => s.points).concat([1]));
+    el.innerHTML = '';
+
+    scores.forEach((s, i) => {
+      const row = document.createElement('div');
+      row.className = 'row' + (i === 0 ? ' top1' : '');
+      row.dataset.table = s.table;
+      const rankMark = i < 3 ? '<span class="medal">' + MEDALS[i] + '</span>' : (i + 1);
+      const pct = Math.max(6, Math.round(s.points / maxPts * 100));
+      row.innerHTML =
+        (i === 0 ? '<div class="crown">\uD83D\uDC51</div>' : '') +
+        '<div class="rank">' + rankMark + '</div>' +
+        '<div class="who">' +
+          '<div class="name">Bord ' + s.table +
+            (s.full ? '<span class="badge-full">FULL BRICKA</span>' : '') +
+            (i === 0 ? '<span class="lead-pill">I ledning</span>' : '') +
+          '</div>' +
+          '<div class="bar"><div class="bar-fill"></div></div>' +
+          '<div class="detail">' + (s.photos != null ? s.photos + ' bilder \u00b7 ' : '') + s.solved + '/' + TASKS.length + ' uppgifter l\u00f6sta</div>' +
+        '</div>' +
+        '<div class="pts"><span class="ptnum">0</span><small>po\u00e4ng</small></div>';
+      el.appendChild(row);
+
+      requestAnimationFrame(() => { row.querySelector('.bar-fill').style.width = pct + '%'; });
+      countUp(row.querySelector('.ptnum'), prevPoints[s.table] || 0, s.points);
+    });
+
+    // FLIP: animera flyttar
+    el.querySelectorAll('.row').forEach(r => {
+      const now = r.getBoundingClientRect().top;
+      const old = oldRects[r.dataset.table];
+      if (old === undefined) {
+        r.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
+          { duration: 450, easing: 'ease' });
+      } else if (Math.abs(old - now) > 1) {
+        r.animate([{ transform: 'translateY(' + (old - now) + 'px)' }, { transform: 'none' }],
+          { duration: 650, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      }
+    });
+
+    prevPoints = {};
+    scores.forEach(s => { prevPoints[s.table] = s.points; });
+  }
+
+  /* =================== FOTOSNURRA =================== */
+  let allItems = [];
+  let shuffled = [], sidx = 0;
+  let started = false, activeIsA = false;
+
+  function shuffleInPlace(a) {
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  }
+  function nextItem() {
+    if (!allItems.length) return null;
+    if (sidx >= shuffled.length) { shuffled = allItems.slice(); shuffleInPlace(shuffled); sidx = 0; }
+    return shuffled[sidx++];
+  }
+  function preload(url) {
+    return new Promise(res => { const im = new Image(); im.onload = im.onerror = () => res(url); im.src = url; });
+  }
+
+  function renderPhotos(items) {
+    allItems = items || [];
+    document.getElementById('pulse').innerHTML =
+      '\uD83D\uDCF8 ' + allItems.length + ' bilder \u00B7 \uD83D\uDD04 uppdaterar var 5:e sekund';
+    if (allItems.length && !started) { started = true; photoTick(); }
+    if (!allItems.length) {
+      started = false;
+      document.getElementById('polaroid').style.display = 'none';
+      document.getElementById('photoEmpty').style.display = 'flex';
+    }
+  }
+
+  async function swapPhoto(item) {
+    const polaroid = document.getElementById('polaroid');
+    const empty = document.getElementById('photoEmpty');
+    empty.style.display = 'none';
+    polaroid.style.display = 'flex';
+
+    const imgA = document.getElementById('imgA'), imgB = document.getElementById('imgB');
+    const incoming = activeIsA ? imgB : imgA;
+    const outgoing = activeIsA ? imgA : imgB;
+
+    incoming.src = item.url;            // redan förladdad → ingen input-lag
+    void incoming.offsetWidth;          // reflow så animationen startar om
+    incoming.classList.add('on');
+    outgoing.classList.remove('on');
+    activeIsA = !activeIsA;
+
+    // byt bildtext med liten fade
+    const cap = document.getElementById('pcap');
+    cap.classList.add('fade');
+    setTimeout(() => {
+      document.getElementById('pcapT').textContent = taskLabel(item.taskIndex);
+      document.getElementById('pcapB').textContent = whoLabel(item.table);
+      cap.classList.remove('fade');
+    }, 350);
+  }
+
+  async function photoTick() {
+    const item = nextItem();
+    if (!item) { started = false; return; }
+    await preload(item.url);
+    swapPhoto(item);
+    // förladda nästa i bakgrunden
+    const upcoming = shuffled[sidx];
+    if (upcoming) preload(upcoming.url);
+    setTimeout(photoTick, 5500);
+  }
+
+  /* =================== TWEAKS =================== */
+  (function () {
+    const DEFAULT = 57;
+    const btn = document.getElementById('tweakBtn');
+    const panel = document.getElementById('tweakPanel');
+    const range = document.getElementById('splitRange');
+    const lbl = document.getElementById('splitLbl');
+    function apply(p) {
+      document.documentElement.style.setProperty('--split', p + '%');
+      lbl.textContent = p + '% / ' + (100 - p) + '%';
+      range.value = p;
+    }
+    const saved = parseInt(localStorage.getItem('sb_split'), 10);
+    apply(!isNaN(saved) ? saved : DEFAULT);
+    btn.addEventListener('click', () => panel.classList.toggle('open'));
+    range.addEventListener('input', () => { apply(parseInt(range.value, 10)); localStorage.setItem('sb_split', range.value); });
+    document.getElementById('splitReset').addEventListener('click', () => { apply(DEFAULT); localStorage.setItem('sb_split', DEFAULT); });
+  })();
+
+  refresh();
+  setInterval(refresh, POLL_MS);
+</script>
+
+
+</body></html>
