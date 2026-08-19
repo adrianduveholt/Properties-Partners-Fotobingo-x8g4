@@ -6,12 +6,12 @@
 <title>Properties &amp; Partners — Fotobingo</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%227%22%20fill=%22%2317191b%22/%3E%3Cg%20fill=%22%23f1efec%22%3E%3Crect%20x=%226%22%20%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3C/g%3E%3Crect%20x=%2213%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22%20fill=%22%23a4917a%22/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%227%22%20fill=%22%2317191b%22/%3E%3Cg%20fill=%22%23f1efec%22%3E%3Crect%20x=%226%22%20%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3C/g%3E%3Crect%20x=%2213%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22%20fill=%22%23a4917a%22/%3E%3C/svg%3E">
-<meta name="theme-color" content="#17191b">
-<meta name="description" content="Fotobingo for Properties & Partners kickoff i Norrkoping den 24 augusti 2026. Los uppgifterna, fyll din bricka och samla bilderna pa den gemensamma vaggen.">
+<meta name="theme-color" content="#0e1012">
+<meta name="description" content="Fotobingo for Properties & Partners kickoff pa Tammsvik den 24 augusti 2026. Los uppgifterna, fyll din bricka och samla bilderna pa den gemensamma vaggen.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://adrianduveholt.github.io/Properties-Partners-Fotobingo-x8g4/">
 <meta property="og:title" content="Properties &amp; Partners — Fotobingo">
-<meta property="og:description" content="Fotobingo for Properties & Partners kickoff i Norrkoping den 24 augusti 2026. Los uppgifterna, fyll din bricka och samla bilderna pa den gemensamma vaggen.">
+<meta property="og:description" content="Fotobingo for Properties & Partners kickoff pa Tammsvik den 24 augusti 2026. Los uppgifterna, fyll din bricka och samla bilderna pa den gemensamma vaggen.">
 <meta property="og:image" content="https://adrianduveholt.github.io/Properties-Partners-Fotobingo-x8g4/logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,18 +20,26 @@
 <style>
   :root {
     /* Neutral foretagspalett - byts nar varumarkesfargerna kommit */
-    --ink: #17191b; --paper: #f1efec; --card: #ffffff; --plum: #17191b;
-    --rose: #8b8781; --gold: #a4917a; --leaf: #4a4d50; --blush: #ded8d0;
-    --line: #e2ded8;
-    --shadow: 0 8px 28px rgba(23,25,27,.10);
+    /* Mork varumarkespalett: svart bakgrund, vit logo och text */
+    --paper: #0e1012;      /* sidbakgrund, off-black (aldrig #000) */
+    --card: #191c1f;       /* kortyta, ett steg upp fran bakgrunden */
+    --line: #2b2f33;       /* kantlinjer */
+    --ink: #f1efec;        /* primar text, varmvit */
+    --plum: #f1efec;       /* rubriker (samma som ink, anvands brett) */
+    --rose: #9d978f;       /* sekundar text */
+    --gold: #b9a68c;       /* accent, champagne - ljusad for mork bakgrund */
+    --blush: #262a2d; --leaf: #3a3e42;
+    --on-light: #0e1012;   /* text ovanpa ljus yta (knappar, pills) */
+    --shadow: 0 10px 30px rgba(0,0,0,.5);
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { background: var(--paper); }   /* mork botten aven vid overscroll */
   html, body { margin: 0; }
   body { font-family: 'Poppins', system-ui, sans-serif; font-weight: 300; color: var(--ink);
     background:
-      radial-gradient(60% 40% at 0% 0%, rgba(23,25,27,.07), transparent 70%),
-      radial-gradient(50% 35% at 100% 0%, rgba(164,145,122,.13), transparent 70%),
-      radial-gradient(120% 80% at 50% -10%, #f7f5f2 0%, var(--paper) 55%) fixed;
+      radial-gradient(60% 40% at 0% 0%, rgba(255,255,255,.05), transparent 70%),
+      radial-gradient(50% 35% at 100% 0%, rgba(185,166,140,.10), transparent 70%),
+      radial-gradient(120% 80% at 50% -10%, #17191c 0%, var(--paper) 55%) fixed;
     min-height: 100dvh; line-height: 1.5; }
   .wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px calc(40px + env(safe-area-inset-bottom)); }
   .view { display: none; animation: rise .45s ease both; }
@@ -44,18 +52,18 @@
   .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .2em 0 0; }
   .logo { display: block; width: 88px; height: 88px; margin: 0 auto 16px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 20px rgba(23,25,27,.16); }
   .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
-  .gdpr { text-align: center; color: #8b8781; font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
-  .lede { text-align: center; color: #65605a; max-width: 32ch; margin: 0 auto 28px; font-size: .95rem; }
-  .btn { display: block; width: 100%; border: 0; cursor: pointer; font-family: 'Poppins'; font-size: .98rem; font-weight: 500; letter-spacing: .02em; padding: 16px 20px; border-radius: 999px; background: var(--plum); color: #fff; box-shadow: var(--shadow); transition: transform .12s ease, background .2s; }
+  .gdpr { text-align: center; color: var(--rose); font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
+  .lede { text-align: center; color: var(--rose); max-width: 32ch; margin: 0 auto 28px; font-size: .95rem; }
+  .btn { display: block; width: 100%; border: 0; cursor: pointer; font-family: 'Poppins'; font-size: .98rem; font-weight: 500; letter-spacing: .02em; padding: 16px 20px; border-radius: 999px; background: var(--ink); color: var(--on-light); box-shadow: var(--shadow); transition: transform .12s ease, background .2s; }
   .btn:active { transform: scale(.97); }
   .btn.ghost { background: transparent; color: var(--plum); box-shadow: none; border: 1.5px solid var(--line); margin-top: 12px; }
   .section-head { text-align: center; margin: 8px 0 22px; }
   .section-head h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.9rem; color: var(--plum); margin: 0 0 4px; }
-  .section-head p { color: #65605a; margin: 0; font-size: .95rem; }
+  .section-head p { color: var(--rose); margin: 0; font-size: .95rem; }
   .tables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .tile { aspect-ratio: 1; border: 0; cursor: pointer; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: transform .12s ease; border: 1px solid var(--line); }
   .tile:active { transform: scale(.95); }
-  .tile.full { background: linear-gradient(135deg,#f4f1ec,#ffffff); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), var(--shadow); }
+  .tile.full { background: linear-gradient(135deg,#24272b,#191c1f); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), var(--shadow); }
   .tile.full .num { color: var(--gold); }
   .tile.full::after { content: "\2605 KLAR"; position: absolute; top: 6px; right: 8px; font-size: .52rem; font-weight: 700; letter-spacing: .08em; color: var(--gold); }
   .tile { position: relative; }
@@ -67,11 +75,11 @@
   .extra-actions label { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; font-size: .88rem; font-weight: 600; padding: 13px 10px; border-radius: 999px; background: transparent; color: var(--plum); border: 1.5px solid var(--line); box-shadow: none; }
   .extra-actions label:active { transform: scale(.97); }
   .extra-actions input { display: none; }
-  #toast button { pointer-events: auto; margin-left: auto; flex-shrink: 0; border: 0; border-radius: 999px; padding: 13px 20px; font: inherit; font-size: .95rem; font-weight: 700; background: var(--gold); color: #fff; cursor: pointer; }
+  #toast button { pointer-events: auto; margin-left: auto; flex-shrink: 0; border: 0; border-radius: 999px; padding: 13px 20px; font: inherit; font-size: .95rem; font-weight: 700; background: var(--gold); color: var(--on-light); cursor: pointer; }
   #lightbox .lb-save { position: fixed; top: 14px; left: 14px; height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: rgba(255,255,255,.14); color: #fff; font: inherit; font-size: .9rem; font-weight: 600; cursor: pointer; }
   #wallFilter { border: 1.5px solid var(--line); background: var(--card); color: var(--plum); font-family: 'Poppins'; font-size: .8rem; font-weight: 600; padding: 7px 10px; border-radius: 999px; -webkit-appearance: none; appearance: none; }
   .float-action { display: none; position: fixed; bottom: max(16px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 60; width: min(320px, 78vw); }
-  .float-action label { display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; font-size: .92rem; font-weight: 600; padding: 14px 18px; border-radius: 999px; background: var(--plum); color: #fff; box-shadow: 0 10px 30px rgba(23,25,27,.3); }
+  .float-action label { display: flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; font-size: .92rem; font-weight: 600; padding: 14px 18px; border-radius: 999px; background: var(--ink); color: var(--on-light); box-shadow: 0 10px 30px rgba(0,0,0,.55); }
   .float-action label:active { transform: scale(.97); }
   .float-action input { display: none; }
   body.on-wall .float-action { display: block; }
@@ -84,9 +92,9 @@
   #lightbox .lb-close { position: fixed; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
   #celebrate { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; pointer-events: none; overflow: hidden; }
   #celebrate.show { display: flex; }
-  #celebrate .cel-card { background: rgba(23,25,27,.94); color: #fff; padding: 26px 34px; border-radius: 22px; text-align: center; animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+  #celebrate .cel-card { background: rgba(31,35,38,.96); color: var(--ink); padding: 26px 34px; border-radius: 22px; text-align: center; animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
   #celebrate .cel-emoji { font-size: 3rem; }
-  #celebrate .cel-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; color: #c4b7a9; margin-top: 6px; }
+  #celebrate .cel-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; color: var(--gold); margin-top: 6px; }
   @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .confetti { position: fixed; top: -20px; width: 10px; height: 14px; border-radius: 2px; opacity: .9; animation: fall 3.6s linear forwards; }
   @keyframes fall { to { transform: translateY(110vh) rotate(600deg); opacity: 1; } }
@@ -100,25 +108,25 @@
   .cell { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); cursor: pointer; display: block; transition: transform .12s ease; }
   .cell:active { transform: scale(.96); }
   .cell input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-  .cell .task { position: absolute; inset: 0; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .72rem; font-weight: 500; color: #65605a; }
+  .cell .task { position: absolute; inset: 0; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .72rem; font-weight: 500; color: #c6c1ba; }
   .cell .cam { position: absolute; bottom: 6px; right: 6px; width: 22px; height: 22px; opacity: .35; }
   .cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .cell.done .task, .cell.done .cam { display: none; }
   .cell.done::after { content: "\2713"; position: absolute; top: 6px; left: 8px; font-size: 1rem; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); font-weight: 700; }
   .cell .banner { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px 7px; background: linear-gradient(to top, rgba(18,19,21,.85), rgba(23,25,27,0)); color: #fff; font-size: .62rem; font-weight: 600; line-height: 1.2; text-align: center; display: none; }
   .cell.done .banner { display: block; }
-  .cell .count { position: absolute; bottom: 6px; right: 6px; background: var(--plum); color: #fff; font-size: .68rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
-  .cell.locked { background: #eae6e0; border-style: dashed; cursor: default; box-shadow: none; }
+  .cell .count { position: absolute; bottom: 6px; right: 6px; background: rgba(14,16,18,.85); color: var(--ink); font-size: .68rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+  .cell.locked { background: #14171a; border-style: dashed; cursor: default; box-shadow: none; }
   .cell.locked:active { transform: none; }
   .cell.locked .cam { display: none; }
-  .cell.locked .task { flex-direction: column; gap: 5px; color: #9a958e; }
+  .cell.locked .task { flex-direction: column; gap: 5px; color: #7e8790; }
   .cell.locked .lockicon { font-size: 1.35rem; opacity: .55; }
   .cell.locked .locktime { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
   #unlockBar { text-align: center; font-size: .78rem; font-weight: 600; color: var(--rose); margin: 0 0 12px; min-height: 1.1em; }
   .wall-filters { display: flex; gap: 8px; margin-bottom: 14px; }
   .wall-filters select { flex: 1; min-width: 0; border: 1.5px solid var(--line); background: var(--card); color: var(--plum); font-family: 'Poppins'; font-size: .8rem; font-weight: 600; padding: 9px 10px; border-radius: 999px; -webkit-appearance: none; appearance: none; text-overflow: ellipsis; }
   .cell.pending { opacity: .6; }
-  .cell.pending::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(23,25,27,.06) 8px, rgba(23,25,27,.06) 16px); }
+  .cell.pending::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,.05) 8px, rgba(255,255,255,.05) 16px); }
   .wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .post { border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
   .post img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
@@ -126,10 +134,10 @@
   .post .meta .t { font-size: .76rem; font-weight: 600; color: var(--plum); line-height: 1.25; }
   .post .meta .b { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); margin-top: 2px; }
 
-  .wall-empty { text-align: center; color: #8b8781; padding: 40px 0; grid-column: 1 / -1; }
-  .toast { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); width: calc(100vw - 28px); max-width: 560px; display: flex; align-items: center; gap: 12px; background: var(--ink); color: #fff; padding: 16px 18px; border-radius: 18px; font-size: 1rem; box-shadow: 0 14px 40px rgba(23,25,27,.3); opacity: 0; transition: all .3s; pointer-events: none; z-index: 80; }
+  .wall-empty { text-align: center; color: var(--rose); padding: 40px 0; grid-column: 1 / -1; }
+  .toast { position: fixed; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px); width: calc(100vw - 28px); max-width: 560px; display: flex; align-items: center; gap: 12px; background: var(--card); color: var(--ink); border: 1px solid var(--line); padding: 16px 18px; border-radius: 18px; font-size: 1rem; box-shadow: 0 14px 40px rgba(23,25,27,.3); opacity: 0; transition: all .3s; pointer-events: none; z-index: 80; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .footnote { text-align: center; color: #8b8781; font-size: .78rem; margin-top: 26px; }
+  .footnote { text-align: center; color: var(--rose); font-size: .78rem; margin-top: 26px; }
 </style>
 </head>
 <body>
@@ -138,24 +146,24 @@
     <img class="logo" src="logo.png" alt="Properties &amp; Partners" onerror="this.remove()">
     <p class="eyebrow">Kickoff 2026</p>
     <h1 class="names">Properties<span class="amp">&amp;</span>Partners</h1>
-    <p class="venue">Norrk&ouml;ping &middot; 24 augusti 2026</p>
+    <p class="venue">Tammsvik &middot; 24 augusti 2026</p>
     <hr class="rule">
-    <p class="lede">Till fotobingo, l&ouml;s uppgifterna och fyll din bricka. Alla bilder samlas p&aring; den gemensamma v&auml;ggen.</p>
+    <p class="lede">Till fotobingo, l&ouml;s uppgifterna och fyll er bricka. Alla bilder samlas p&aring; den gemensamma v&auml;ggen.</p>
     <button class="btn" onclick="show('tables')">Till fotobingo</button>
     <button class="btn ghost" onclick="openWall()">Se bildv&auml;ggen</button>
     <p class="gdpr">Bilderna hanteras på uppdrag av Properties &amp; Partners, delas med företaget och raderas 30 dagar efter kickoffen. Deltagandet är frivilligt.</p>
   </section>
   <section id="view-tables" class="view">
-    <div class="section-head"><h2>Vem är du?</h2><p>Tryck p&aring; ditt namn</p></div>
+    <div class="section-head"><h2>Vilket lag är ni?</h2><p>Tryck p&aring; ert lag</p></div>
     <div id="tableGrid" class="tables"></div>
-    <p class="footnote">Valde du fel? Tryck bara p&aring; ett annat namn.</p>
+    <p class="footnote">Valde ni fel? Tryck bara p&aring; ett annat lag.</p>
   </section>
   <section id="view-card" class="view">
     <div class="topbar"><button class="back" onclick="show('tables')">&larr;</button><span class="ttl" id="cardTitle">Bricka</span><button class="wall-link" onclick="openWall()">V&auml;ggen &rarr;</button></div>
     <p id="unlockBar"></p>
     <div id="bingoGrid" class="grid"></div>
     <div class="extra-actions">
-      <label>&#x1F4F7; Ta en selfie!<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 100)"></label>
+      <label>&#x1F4F7; Ta en lagbild!<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 100)"></label>
       <label>&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
     </div>
     <p class="footnote">Tryck p&aring; en ruta &rarr; kameran &ouml;ppnas &rarr; fotot fyller brickan och hamnar p&aring; v&auml;ggen.<br>Ta g&auml;rna <strong>flera bilder p&aring; samma uppgift</strong> &mdash; ju fler desto roligare!</p>
@@ -175,38 +183,49 @@
 <script>
   // ============ KONFIGURATION ============
   const API_URL = "https://script.google.com/macros/s/AKfycbz20r6ey40S7co1zVwu9b8j-XIDK54qIij765GAXcz5CcXC2gIFkAzNAgc1KWK_6Vx9/exec"; // <-- /exec-URL fran Properties & Partners EGNA Apps Script-projekt
-  // 8 deltagare. id = kort kod (anvands i filnamn), name = det som visas.
-  // Byt bara ut name-varden nar namnen kommit - ror inte id.
-  const PEOPLE = [
-    { id: "p1", name: "Daniel Sochor" },
-    { id: "p2", name: "Deltagare 2" },
-    { id: "p3", name: "Deltagare 3" },
-    { id: "p4", name: "Deltagare 4" },
-    { id: "p5", name: "Deltagare 5" },
-    { id: "p6", name: "Deltagare 6" },
-    { id: "p7", name: "Deltagare 7" },
-    { id: "p8", name: "Deltagare 8" }
+  // 8 LAG. id = kort kod (hamnar i filnamnet), name = det som visas i appen.
+  // Byt bara ut name-varden nar lagnamnen kommit - ror inte id.
+  const TEAMS = [
+    { id: "t1", name: "Lag 1" },
+    { id: "t2", name: "Lag 2" },
+    { id: "t3", name: "Lag 3" },
+    { id: "t4", name: "Lag 4" },
+    { id: "t5", name: "Lag 5" },
+    { id: "t6", name: "Lag 6" },
+    { id: "t7", name: "Lag 7" },
+    { id: "t8", name: "Lag 8" }
   ];
-  function personName(id) {
-    const p = PEOPLE.find(x => x.id === String(id));
-    return p ? p.name : String(id);
+  function teamName(id) {
+    const t = TEAMS.find(x => x.id === String(id));
+    return t ? t.name : String(id);
   }
   const TASKS = [
-    // Rad 1 \u2014 15:00 ankomst & mingel
-    "N\u00e5gon du inte jobbat med i \u00e5r", "B\u00e4sta handslaget", "En sk\u00e5l \ud83e\udd42",
-    // Rad 2 \u2014 16:00 Norrk\u00f6ping
-    "Industrilandskapet i bakgrunden", "N\u00e4rmaste tegelfasad", "Sp\u00e5rvagnen p\u00e5 bild",
-    // Rad 3 \u2014 17:00 m\u00e4klarliv
-    "En \u201ds\u00e5ld!\u201d-pose", "N\u00e5gon mitt i sitt b\u00e4sta s\u00e4ljargument", "Dagens mest fotogeniska detalj",
-    // Rad 4 \u2014 18:00 AW
-    "Hela g\u00e4nget i en bild", "Kv\u00e4llens b\u00e4sta dansmove", "Sista sk\u00e5len \ud83c\udf7b"
+    // Rad 1 - Mingel
+    "Någon du inte jobbat med i år", "Bästa handslaget", "En skål 🥂",
+    // Rad 2 - Häng
+    "Herrgården i bakgrunden", "Något vid vattnet", "Någon som tagit av sig kavajen",
+    // Rad 3 - Middag
+    "Dukningen innan någon rört den", "Någon mitt i sitt bästa säljargument", "Kvällens bästa tal",
+    // Rad 4 - Fest
+    "Hela laget i en bild", "Kvällens bästa dansmove", "Sista skålen 🍻"
   ];
   const POLL_MS = 4000;
 
-  // ===== TIDSSCHEMA: en rad (3 uppgifter) slapps i taget =====
-  // EVENT_START = nar forsta raden ska vara oppen. Tomt = allt oppet direkt (test).
-  const EVENT_START = "2026-08-18T15:00:00+02:00";   // TILLFALLIGT: satt till 18 aug for Daniels granskning. ATERSTALL till 2026-08-24T15:00:00+02:00 fore kickoffen!
-  const RELEASE_EVERY_MIN = 60;         // 60 min mellan rader -> allt oppet 18:00
+  // ===== TIDSSCHEMA: en rad (3 uppgifter) slapps per angiven tidpunkt =====
+  // PREVIEW_ALL = true  -> ALLT olast, oavsett klocka. For granskning.
+  // PREVIEW_ALL = false -> raderna oppnar exakt pa tiderna i ROW_UNLOCKS.
+  // Detta ar enda spaken som behover flippas fore kickoffen.
+  const PREVIEW_ALL = true;
+
+  // En tidpunkt per rad, i ordning. Ska vara lika manga som antal rader
+  // (TASKS.length / ROW_SIZE = 4). Satt tiden nar raden ska bli synlig.
+  // Tom strang eller null = raden ar oppen direkt.
+  const ROW_UNLOCKS = [
+    "2026-08-24T15:00:00+02:00",   // Rad 1 - Mingel
+    "2026-08-24T17:00:00+02:00",   // Rad 2 - Hang
+    "2026-08-24T19:00:00+02:00",   // Rad 3 - Middag
+    "2026-08-24T21:00:00+02:00"    // Rad 4 - Fest
+  ];
   const ROW_SIZE = 3;                  // uppgifter per rad
   // =======================================
   let currentTable = null, lastView = 'landing', pollTimer = null, feed = [], pendingUploads = [];
@@ -257,8 +276,8 @@
   }
   (function () {
     const t = document.getElementById('filterTable');
-    const a = ['<option value="alla">Alla deltagare</option>'];
-    PEOPLE.forEach(p => a.push('<option value="' + p.id + '">' + p.name + '</option>'));
+    const a = ['<option value="alla">Alla lag</option>'];
+    TEAMS.forEach(p => a.push('<option value="' + p.id + '">' + p.name + '</option>'));
     a.push('<option value="gemensam">Gemensamt</option>');
     t.innerHTML = a.join('');
     const k = document.getElementById('filterTask');
@@ -268,36 +287,39 @@
     k.innerHTML = b.join('');
   })();
   const tableGrid = document.getElementById('tableGrid');
-  PEOPLE.forEach(p => {
+  TEAMS.forEach(p => {
     const b = document.createElement('button'); b.className = 'tile'; b.dataset.table = p.id;
     b.innerHTML = '<span class="pname">' + p.name + '</span>';
     b.onclick = () => openCard(p.id); tableGrid.appendChild(b);
   });
-  const camIcon = '<svg class="cam" viewBox="0 0 24 24" fill="none" stroke="#17191b" stroke-width="2"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h0a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+  const camIcon = '<svg class="cam" viewBox="0 0 24 24" fill="none" stroke="#8e8981" stroke-width="2"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h0a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>';
   function openCard(tableNo) {
     currentTable = tableNo;
-    document.getElementById('cardTitle').textContent = personName(tableNo);
+    document.getElementById('cardTitle').textContent = teamName(tableNo);
     renderCard(); show('card'); refreshFeed();
   }
   // ===== Upplasning over tid =====
-  function eventStartMs() {
-    if (!EVENT_START) return null;
-    const t = new Date(EVENT_START).getTime();
+  function totalRows() { return Math.ceil(TASKS.length / ROW_SIZE); }
+  // Tidpunkten da rad nr rowIdx (0-baserad) oppnar. null = ingen tid satt.
+  function rowUnlockMs(rowIdx) {
+    const s = ROW_UNLOCKS[rowIdx];
+    if (!s) return null;
+    const t = new Date(s).getTime();
     return isNaN(t) ? null : t;
   }
-  function totalRows() { return Math.ceil(TASKS.length / ROW_SIZE); }
+  // Raderna oppnar i ordning: vi slutar rakna vid forsta rad som inte last upp.
   function releasedRows() {
-    const start = eventStartMs();
-    if (start === null) return totalRows();
-    const elapsed = Math.max(0, Date.now() - start);
-    return Math.min(totalRows(), 1 + Math.floor(elapsed / (RELEASE_EVERY_MIN * 60000)));
+    if (PREVIEW_ALL) return totalRows();
+    const now = Date.now();
+    let n = 0;
+    for (let i = 0; i < totalRows(); i++) {
+      const t = rowUnlockMs(i);
+      if (t === null || now >= t) n++; else break;
+    }
+    return n;
   }
   function unlockedCount() { return Math.min(TASKS.length, releasedRows() * ROW_SIZE); }
-  function rowUnlockTime(idx) {
-    const start = eventStartMs();
-    if (start === null) return null;
-    return start + Math.floor(idx / ROW_SIZE) * RELEASE_EVERY_MIN * 60000;
-  }
+  function rowUnlockTime(idx) { return rowUnlockMs(Math.floor(idx / ROW_SIZE)); }
   function fmtTime(ms) {
     const d = new Date(ms);
     return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
@@ -305,11 +327,11 @@
   function updateUnlockBar() {
     const bar = document.getElementById('unlockBar');
     if (!bar) return;
-    const start = eventStartMs();
-    if (start === null) { bar.textContent = ''; return; }
+    if (PREVIEW_ALL) { bar.textContent = ''; return; }
     const rows = releasedRows();
     if (rows >= totalRows()) { bar.textContent = 'Alla uppgifter \u00e4r \u00f6ppna \u2014 lycka till! \ud83c\udf89'; return; }
-    const next = start + rows * RELEASE_EVERY_MIN * 60000;
+    const next = rowUnlockMs(rows);
+    if (next === null) { bar.textContent = ''; return; }
     const minsLeft = Math.max(0, Math.round((next - Date.now()) / 60000));
     bar.textContent = ROW_SIZE + ' nya uppgifter \u00f6ppnar ' + fmtTime(next) +
       (minsLeft <= 60 ? ' (om ' + minsLeft + ' min)' : '');
@@ -429,7 +451,7 @@
     if (!items.length) { grid.innerHTML = '<p class="wall-empty">Inga bilder matchar filtret \u00e4n.</p>'; return; }
     items.reverse().forEach(f => {
       const post = document.createElement('div'); post.className = 'post';
-      const who = (f.table === 'gemensam') ? 'Gemensamt' : personName(f.table);
+      const who = (f.table === 'gemensam') ? 'Gemensamt' : teamName(f.table);
       post.innerHTML = '<img src="' + f.url + '" loading="lazy"><div class="meta"><div class="t">' + taskLabel(f.taskIndex) + '</div><div class="b">' + who + '</div></div>';
       post.onclick = () => openLightbox(f);
       grid.appendChild(post);
@@ -491,10 +513,10 @@
   }
   function celebrate(tableNo) {
     const layer = document.getElementById('celebrate');
-    layer.querySelector('.cel-text').textContent = personName(tableNo) + ' har full bricka!';
+    layer.querySelector('.cel-text').textContent = teamName(tableNo) + ' har full bricka!';
     layer.classList.add('show');
     // konfetti
-    const colors = ['#c4a35a','#6e3b4e','#c97b6b','#6f7d5a','#c6b499'];
+    const colors = ['#a4917a','#c4b7a9','#f1efec','#8b8781','#ded8d0'];
     for (let i = 0; i < 90; i++) {
       const c = document.createElement('span'); c.className = 'confetti';
       c.style.left = Math.random()*100 + 'vw';
@@ -513,7 +535,7 @@
     img.onerror = () => { img.onerror = null; img.src = f.url; }; // fallback till standardstorlek
     img.src = (f.url.indexOf('googleusercontent') > -1) ? f.url + '=s1600' : f.url;
     document.getElementById('lbTitle').textContent = taskLabel(f.taskIndex);
-    document.getElementById('lbTable').textContent = (f.table === 'gemensam') ? 'Gemensamt' : personName(f.table);
+    document.getElementById('lbTable').textContent = (f.table === 'gemensam') ? 'Gemensamt' : teamName(f.table);
     document.getElementById('lightbox').classList.add('show');
   }
   function closeLightbox() {

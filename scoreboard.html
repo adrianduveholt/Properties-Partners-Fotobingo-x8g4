@@ -4,19 +4,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Properties &amp; Partners — Poängställning</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%227%22%20fill=%22%2317191b%22/%3E%3Cg%20fill=%22%23f1efec%22%3E%3Crect%20x=%226%22%20%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%226%22%20%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%226%22%20%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2213%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3Crect%20x=%2220%22%20y=%2220%22%20width=%226%22%20height=%226%22%20rx=%221.4%22/%3E%3C/g%3E%3Crect%20x=%2213%22%20y=%2213%22%20width=%226%22%20height=%226%22%20rx=%221.4%22%20fill=%22%23a4917a%22/%3E%3C/svg%3E">
-<meta name="theme-color" content="#17191b">
+<meta name="theme-color" content="#0e1012">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#17191b; --paper:#f1efec; --card:#ffffff; --plum:#17191b; --rose:#8b8781; --gold:#a4917a; --leaf:#4a4d50; --blush:#ded8d0; --line:#e2ded8; }
+  :root { --paper:#0e1012; --card:#191c1f; --line:#2b2f33; --ink:#f1efec; --plum:#f1efec;
+    --rose:#9d978f; --gold:#b9a68c; --leaf:#3a3e42; --blush:#262a2d;
+    --on-light:#0e1012;        /* text ovanpa ljus yta */
+    --paper-ink:#17191b;       /* text pa det VITA polaroidpappret */
+    --paper-sub:#6f6a64; }     /* dampad text pa pappret */
+  html { background: var(--paper); }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family:'Poppins',system-ui,sans-serif; font-weight:300; color:var(--ink);
     background:
-      radial-gradient(45% 45% at 0% 0%, rgba(23,25,27,.07), transparent 70%),
-      radial-gradient(40% 40% at 100% 0%, rgba(164,145,122,.13), transparent 70%),
-      radial-gradient(130% 90% at 50% -10%, #f7f5f2 0%, var(--paper) 55%) fixed;
+      radial-gradient(45% 45% at 0% 0%, rgba(255,255,255,.05), transparent 70%),
+      radial-gradient(40% 40% at 100% 0%, rgba(185,166,140,.10), transparent 70%),
+      radial-gradient(130% 90% at 50% -10%, #17191c 0%, var(--paper) 55%) fixed;
     height:100dvh; padding: 2.2vh 3.5vw; overflow:hidden; cursor:none; display:flex; flex-direction:column; }
   header { text-align:center; margin-bottom: 1.6vh; flex:none; }
   .eyebrow { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,3vh,2.2rem); letter-spacing:.02em; text-transform:none; color:var(--plum); font-weight:600; line-height:1; }
@@ -38,14 +43,14 @@
     box-shadow:0 18px 46px rgba(23,25,27,.22); display:none; }
   #tweakPanel.open { display:block; }
   #tweakPanel h3 { font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.15rem; color:var(--plum); margin-bottom:2px; }
-  #tweakPanel .sub { font-size:.82rem; color:#8a7c68; margin-bottom:16px; }
+  #tweakPanel .sub { font-size:.82rem; color:var(--rose); margin-bottom:16px; }
   #tweakPanel .field label { display:flex; justify-content:space-between; font-size:.85rem; font-weight:700; color:var(--plum); margin-bottom:8px; }
   #tweakPanel .field label span { color:var(--rose); }
   #tweakPanel input[type=range] { width:100%; accent-color:var(--rose); cursor:pointer; }
-  #tweakPanel .ends { display:flex; justify-content:space-between; font-size:.72rem; color:#9b8d79; margin-top:4px; }
+  #tweakPanel .ends { display:flex; justify-content:space-between; font-size:.72rem; color:var(--rose); margin-top:4px; }
   #tweakPanel .reset { margin-top:16px; width:100%; padding:9px; border:1px solid var(--line); border-radius:10px;
     background:transparent; color:var(--plum); font-weight:700; font-size:.82rem; cursor:pointer; font-family:inherit; }
-  #tweakPanel .reset:hover { background:var(--paper); }
+  #tweakPanel .reset:hover { background:var(--blush); }
   .panel-title { font-family:'Cormorant Garamond',serif; font-weight:600; font-size: clamp(1.1rem,3vh,2rem); color:var(--plum); margin-bottom:1.2vh; flex:none; display:flex; align-items:center; gap:.5em; }
 
   /* ---------- LEADERBOARD ---------- */
@@ -58,28 +63,28 @@
   .row .rank .medal { font-size:1.05em; }
   .row .who { flex:1; min-width:0; }
   .row .who .name { font-weight:700; font-size: clamp(.95rem,3vh,2.3rem); color:var(--plum); display:flex; align-items:center; gap:.5em; flex-wrap:wrap; }
-  .row .who .detail { font-size: clamp(.7rem,1.9vh,1.2rem); color:#65605a; margin-top:.2em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row .who .detail { font-size: clamp(.7rem,1.9vh,1.2rem); color:var(--rose); margin-top:.2em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .row .pts { font-family:'Cormorant Garamond',serif; font-weight:700; font-size: clamp(1.2rem,4.6vh,3.4rem); color:var(--plum); flex:none; line-height:1; text-align:right; }
   .row .pts small { font-size:.32em; font-weight:600; color:var(--rose); display:block; text-align:right; letter-spacing:.12em; text-transform:uppercase; margin-top:.3em; }
 
   /* progress bar */
-  .bar { height:.55em; background:#e8e4de; border-radius:999px; margin-top:.4em; overflow:hidden; }
+  .bar { height:.55em; background:#2b2f33; border-radius:999px; margin-top:.4em; overflow:hidden; }
   .bar-fill { height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--rose),var(--gold)); transition:width 1s cubic-bezier(.2,.8,.2,1); }
 
   /* pills */
   .badge-full { font-size:.5em; background:var(--leaf); color:#fff; padding:.25em .7em; border-radius:999px; font-weight:700; letter-spacing:.05em; }
-  .lead-pill { font-size:.5em; background:var(--gold); color:#fff; padding:.25em .7em; border-radius:999px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; animation:leadpop .6s ease both; }
+  .lead-pill { font-size:.5em; background:var(--gold); color:var(--on-light); padding:.25em .7em; border-radius:999px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; animation:leadpop .6s ease both; }
   @keyframes leadpop { from{ transform:scale(.6); opacity:0;} to{ transform:scale(1); opacity:1;} }
 
   /* leader treatment */
-  .row.top1 { background: linear-gradient(105deg,#f1eeeb,#ffffff);
+  .row.top1 { background: linear-gradient(105deg,#25282c,#191c1f);
     border-color: var(--gold); box-shadow:0 12px 34px rgba(164,145,122,.28);
     }
   .row.top1 .rank { color: var(--gold); }
   .row.top1 .bar-fill { background:linear-gradient(90deg,var(--gold),#c4b7a9); }
   /* glint sweep across the leader */
   .row.top1::after { content:""; position:absolute; top:0; left:0; width:45%; height:100%; will-change:transform;
-    background:linear-gradient(100deg,transparent, rgba(255,255,255,.75), transparent);
+    background:linear-gradient(100deg,transparent, rgba(255,255,255,.22), transparent);
     transform:translateX(-160%) skewX(-18deg); animation:glint 4.5s ease-in-out infinite; pointer-events:none; }
   @keyframes glint { 0%{ transform:translateX(-160%) skewX(-18deg); } 30%,100%{ transform:translateX(320%) skewX(-18deg); } }
   .crown { position:absolute; top:-.55em; left:.55em; font-size:clamp(1.1rem,2.2vw,2rem); transform:rotate(-14deg); filter:drop-shadow(0 3px 4px rgba(23,25,27,.2)); }
@@ -88,25 +93,25 @@
   .photostage { position:relative; width:100%; flex:1; min-height:0; display:flex; justify-content:center; align-items:flex-start; }
   .deck { position:relative; width:min(100%, 58vh); }
   .deck::before { content:""; display:block; padding-top:118%; }  /* reserve polaroid height */
-  .stack-back { position:absolute; inset:0; background:var(--card); border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 22px rgba(23,25,27,.10); }
+  .stack-back { position:absolute; inset:0; background:#ddd8d1; border:1px solid var(--line); border-radius:10px; box-shadow:0 8px 22px rgba(23,25,27,.10); }
   .back1 { transform:rotate(4deg) translateY(1.2%); }
   .back2 { transform:rotate(-5deg) translateY(2.4%); }
   .polaroid { position:absolute; inset:0; background:#fdfcfa; border-radius:10px;
     padding:5% 5% 0; box-shadow:0 16px 40px rgba(23,25,27,.20); transform:rotate(-1.2deg);
     display:flex; flex-direction:column; animation:dealin .7s cubic-bezier(.2,.8,.2,1) both; }
   @keyframes dealin { from{ opacity:0; transform:rotate(6deg) translateY(-14px) scale(.94);} to{ opacity:1; transform:rotate(-1.2deg) translateY(0) scale(1);} }
-  .window { position:relative; width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:4px; background:var(--blush); }
+  .window { position:relative; width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:4px; background:#e8e4de; }
   .window img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0;
     transition:opacity .9s ease; will-change:transform,opacity; }
   .window img.on { opacity:1; animation:kenburns 7s ease-out both; }
   @keyframes kenburns { from{ transform:scale(1.02);} to{ transform:scale(1.12) translate(-1%,-1.5%);} }
   .pcap { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:.5em .2em; }
-  .pcap .t { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.1rem,2.4vw,2.1rem); color:var(--plum); line-height:1.05; transition:opacity .35s ease; }
-  .pcap .b { font-size:clamp(.7rem,1vw,.95rem); color:var(--rose); text-transform:uppercase; letter-spacing:.1em; font-weight:700; margin-top:.25em; transition:opacity .35s ease; }
+  .pcap .t { font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(1.1rem,2.4vw,2.1rem); color:var(--paper-ink); line-height:1.05; transition:opacity .35s ease; }
+  .pcap .b { font-size:clamp(.7rem,1vw,.95rem); color:var(--paper-sub); text-transform:uppercase; letter-spacing:.1em; font-weight:700; margin-top:.25em; transition:opacity .35s ease; }
   .pcap.fade .t, .pcap.fade .b { opacity:0; }
 
-  .empty { color:#9b8d79; padding:30px 0; text-align:center; }
-  .pulse { position:fixed; bottom:2vh; right:2vw; font-size:.8rem; color:#bcae9c; }
+  .empty { color:var(--rose); padding:30px 0; text-align:center; }
+  .pulse { position:fixed; bottom:2vh; right:2vw; font-size:.8rem; color:#6d6862; }
 </style>
 </head>
 <body>
@@ -114,12 +119,12 @@
   <header>
     <img class="sb-logo" src="logo.png" alt="" onerror="this.remove()">
     <div class="eyebrow">Properties &amp; Partners</div>
-    <div class="venue">Kickoff &middot; Norrk&ouml;ping &middot; 24 augusti 2026</div>
+    <div class="venue">Kickoff &middot; Tammsvik &middot; 24 augusti 2026</div>
     <h1>Poängställning</h1>
   </header>
   <div class="layout">
     <section>
-      <div class="panel-title">🏆 Deltagare</div>
+      <div class="panel-title">🏆 Lag</div>
       <div id="board"><p class="empty">Väntar på poäng…</p></div>
     </section>
     <section>
@@ -160,21 +165,25 @@
   // Samma /exec-URL som i index.html:
   const API_URL = "https://script.google.com/macros/s/AKfycbz20r6ey40S7co1zVwu9b8j-XIDK54qIij765GAXcz5CcXC2gIFkAzNAgc1KWK_6Vx9/exec"; // <-- samma /exec-URL som i index.html // <-- SAMMA /exec-URL som i index.html
   const TASKS = [
-    "N\u00e5gon du inte jobbat med i \u00e5r","B\u00e4sta handslaget","En sk\u00e5l \ud83e\udd42",
-    "Industrilandskapet i bakgrunden","N\u00e4rmaste tegelfasad","Sp\u00e5rvagnen p\u00e5 bild",
-    "En \u201ds\u00e5ld!\u201d-pose","N\u00e5gon mitt i sitt b\u00e4sta s\u00e4ljargument","Dagens mest fotogeniska detalj",
-    "Hela g\u00e4nget i en bild","Kv\u00e4llens b\u00e4sta dansmove","Sista sk\u00e5len \ud83c\udf7b"
+    // Rad 1 - Mingel
+    "Någon du inte jobbat med i år", "Bästa handslaget", "En skål 🥂",
+    // Rad 2 - Häng
+    "Herrgården i bakgrunden", "Något vid vattnet", "Någon som tagit av sig kavajen",
+    // Rad 3 - Middag
+    "Dukningen innan någon rört den", "Någon mitt i sitt bästa säljargument", "Kvällens bästa tal",
+    // Rad 4 - Fest
+    "Hela laget i en bild", "Kvällens bästa dansmove", "Sista skålen 🍻"
   ];
   // Samma id/namn-lista som i index.html - hall dem identiska
-  const PEOPLE = [
-    { id: "p1", name: "Daniel Sochor" }, { id: "p2", name: "Deltagare 2" },
-    { id: "p3", name: "Deltagare 3" }, { id: "p4", name: "Deltagare 4" },
-    { id: "p5", name: "Deltagare 5" }, { id: "p6", name: "Deltagare 6" },
-    { id: "p7", name: "Deltagare 7" }, { id: "p8", name: "Deltagare 8" }
+  const TEAMS = [
+    { id: "t1", name: "Lag 1" }, { id: "t2", name: "Lag 2" },
+    { id: "t3", name: "Lag 3" }, { id: "t4", name: "Lag 4" },
+    { id: "t5", name: "Lag 5" }, { id: "t6", name: "Lag 6" },
+    { id: "t7", name: "Lag 7" }, { id: "t8", name: "Lag 8" }
   ];
-  function personName(id) {
-    const p = PEOPLE.find(x => x.id === String(id));
-    return p ? p.name : String(id);
+  function teamName(id) {
+    const t = TEAMS.find(x => x.id === String(id));
+    return t ? t.name : String(id);
   }
   const POLL_MS = 5000;
 
@@ -183,7 +192,7 @@
     if (i === 101) return 'Spontanbild';
     return TASKS[i] || '';
   }
-  function whoLabel(t) { return (t === 'gemensam') ? 'Gemensamt' : personName(t); }
+  function whoLabel(t) { return (t === 'gemensam') ? 'Gemensamt' : teamName(t); }
 
   let lastScoresJson = '';
   async function refresh() {
@@ -234,7 +243,7 @@
         (i === 0 ? '<div class="crown">\uD83D\uDC51</div>' : '') +
         '<div class="rank">' + rankMark + '</div>' +
         '<div class="who">' +
-          '<div class="name">Bord ' + s.table +
+          '<div class="name">' + teamName(s.table) +
             (s.full ? '<span class="badge-full">FULL BRICKA</span>' : '') +
             (i === 0 ? '<span class="lead-pill">I ledning</span>' : '') +
           '</div>' +
