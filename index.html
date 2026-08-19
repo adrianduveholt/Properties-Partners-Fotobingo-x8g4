@@ -47,10 +47,13 @@
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .view, .tile, .cell { animation: none !important; transition: none !important; } }
   .eyebrow { font-size: .7rem; letter-spacing: .34em; text-transform: uppercase; color: var(--rose); font-weight: 500; text-align: center; }
-  .names { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.1rem, 9vw, 3.1rem); line-height: 1.1; letter-spacing: .01em; text-align: center; margin: .1em 0 0; color: var(--plum); }
-  .names .amp { color: var(--gold); font-size: 1em; margin: 0 .18em; font-style: italic; }
-  .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .2em 0 0; }
-  .logo { display: block; width: 88px; height: 88px; margin: 0 auto 16px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 20px rgba(23,25,27,.16); }
+  /* Ordmarket. Vit PNG pa transparent botten - ingen ram, ingen skugga,
+     ingen bakgrund. Alt-texten far bara typografi sa den duger som fallback
+     om bilden inte laddas. */
+  .brand { margin: 6px 0 18px; text-align: center; font-family: 'Cormorant Garamond', serif;
+    font-weight: 600; font-size: clamp(1.7rem, 7.5vw, 2.4rem); line-height: 1.15; color: var(--ink); }
+  .brand img { display: block; width: min(100%, 330px); height: auto; margin: 0 auto; }
+  .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .45em 0 0; }
   .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
   .gdpr { text-align: center; color: var(--rose); font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
   .lede { text-align: center; color: var(--rose); max-width: 32ch; margin: 0 auto 28px; font-size: .95rem; }
@@ -143,9 +146,8 @@
 <body>
 <div class="wrap">
   <section id="view-landing" class="view active">
-    <img class="logo" src="logo.png" alt="Properties &amp; Partners" onerror="this.remove()">
+    <h1 class="brand"><img src="logo.png" alt="Properties &amp; Partners — Fastighetsm&auml;klare"></h1>
     <p class="eyebrow">Kickoff 2026</p>
-    <h1 class="names">Properties<span class="amp">&amp;</span>Partners</h1>
     <p class="venue">Tammsvik &middot; 24 augusti 2026</p>
     <hr class="rule">
     <p class="lede">Till fotobingo, l&ouml;s uppgifterna och fyll er bricka. Alla bilder samlas p&aring; den gemensamma v&auml;ggen.</p>
