@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Palett matchad mot brollopsmenyn: ivory, eucalyptus, guld, blush */
     /* Neutral foretagspalett - byts nar varumarkesfargerna kommit */
     --ink: #17191b; --paper: #f1efec; --card: #ffffff; --plum: #17191b;
     --rose: #8b8781; --gold: #a4917a; --leaf: #4a4d50; --blush: #ded8d0;
@@ -32,7 +31,7 @@
   .eyebrow { font-size: .7rem; letter-spacing: .34em; text-transform: uppercase; color: var(--rose); font-weight: 500; text-align: center; }
   .names { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.1rem, 9vw, 3.1rem); line-height: 1.1; letter-spacing: .01em; text-align: center; margin: .1em 0 0; color: var(--plum); }
   .names .amp { color: var(--gold); font-size: 1em; margin: 0 .18em; font-style: italic; }
-  .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .2em 0 0; letter-spacing: .03em; }
+  .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .2em 0 0; }
   .logo { display: block; width: 88px; height: 88px; margin: 0 auto 16px; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 20px rgba(23,25,27,.16); }
   .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
   .gdpr { text-align: center; color: #8b8781; font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
@@ -42,11 +41,11 @@
   .btn.ghost { background: transparent; color: var(--plum); box-shadow: none; border: 1.5px solid var(--line); margin-top: 12px; }
   .section-head { text-align: center; margin: 8px 0 22px; }
   .section-head h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.9rem; color: var(--plum); margin: 0 0 4px; }
-  .section-head p { color: #6b5d4c; margin: 0; font-size: .95rem; }
+  .section-head p { color: #65605a; margin: 0; font-size: .95rem; }
   .tables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .tile { aspect-ratio: 1; border: 0; cursor: pointer; border-radius: 18px; background: var(--card); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: transform .12s ease; border: 1px solid var(--line); }
   .tile:active { transform: scale(.95); }
-  .tile.full { background: linear-gradient(135deg,#fff7e6,#fffdf8); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), var(--shadow); }
+  .tile.full { background: linear-gradient(135deg,#f4f1ec,#ffffff); border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), var(--shadow); }
   .tile.full .num { color: var(--gold); }
   .tile.full::after { content: "\2605 KLAR"; position: absolute; top: 6px; right: 8px; font-size: .52rem; font-weight: 700; letter-spacing: .08em; color: var(--gold); }
   .tile { position: relative; }
@@ -75,9 +74,9 @@
   #lightbox .lb-close { position: fixed; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,.14); color: #fff; font-size: 1.4rem; cursor: pointer; line-height: 1; }
   #celebrate { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; pointer-events: none; overflow: hidden; }
   #celebrate.show { display: flex; }
-  #celebrate .cel-card { background: rgba(48,54,45,.94); color: #fff; padding: 26px 34px; border-radius: 22px; text-align: center; animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+  #celebrate .cel-card { background: rgba(23,25,27,.94); color: #fff; padding: 26px 34px; border-radius: 22px; text-align: center; animation: pop .5s cubic-bezier(.2,1.4,.4,1) both; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
   #celebrate .cel-emoji { font-size: 3rem; }
-  #celebrate .cel-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; color: #c6b499; margin-top: 6px; }
+  #celebrate .cel-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.5rem; color: #c4b7a9; margin-top: 6px; }
   @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .confetti { position: fixed; top: -20px; width: 10px; height: 14px; border-radius: 2px; opacity: .9; animation: fall 3.6s linear forwards; }
   @keyframes fall { to { transform: translateY(110vh) rotate(600deg); opacity: 1; } }
@@ -91,12 +90,12 @@
   .cell { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); cursor: pointer; display: block; transition: transform .12s ease; }
   .cell:active { transform: scale(.96); }
   .cell input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
-  .cell .task { position: absolute; inset: 0; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .72rem; font-weight: 500; color: #6b5d4c; }
+  .cell .task { position: absolute; inset: 0; padding: 8px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: .72rem; font-weight: 500; color: #65605a; }
   .cell .cam { position: absolute; bottom: 6px; right: 6px; width: 22px; height: 22px; opacity: .35; }
   .cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .cell.done .task, .cell.done .cam { display: none; }
   .cell.done::after { content: "\2713"; position: absolute; top: 6px; left: 8px; font-size: 1rem; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.5); font-weight: 700; }
-  .cell .banner { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px 7px; background: linear-gradient(to top, rgba(18,19,21,.85), rgba(43,33,24,0)); color: #fff; font-size: .62rem; font-weight: 600; line-height: 1.2; text-align: center; display: none; }
+  .cell .banner { position: absolute; left: 0; right: 0; bottom: 0; padding: 6px 8px 7px; background: linear-gradient(to top, rgba(18,19,21,.85), rgba(23,25,27,0)); color: #fff; font-size: .62rem; font-weight: 600; line-height: 1.2; text-align: center; display: none; }
   .cell.done .banner { display: block; }
   .cell .count { position: absolute; bottom: 6px; right: 6px; background: var(--plum); color: #fff; font-size: .68rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
   .cell.locked { background: #eae6e0; border-style: dashed; cursor: default; box-shadow: none; }
@@ -109,7 +108,7 @@
   .wall-filters { display: flex; gap: 8px; margin-bottom: 14px; }
   .wall-filters select { flex: 1; min-width: 0; border: 1.5px solid var(--line); background: var(--card); color: var(--plum); font-family: 'Poppins'; font-size: .8rem; font-weight: 600; padding: 9px 10px; border-radius: 999px; -webkit-appearance: none; appearance: none; text-overflow: ellipsis; }
   .cell.pending { opacity: .6; }
-  .cell.pending::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(20,50,74,.06) 8px, rgba(20,50,74,.06) 16px); }
+  .cell.pending::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(23,25,27,.06) 8px, rgba(23,25,27,.06) 16px); }
   .wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .post { border-radius: 16px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
   .post img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
