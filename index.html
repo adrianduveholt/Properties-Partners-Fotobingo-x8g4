@@ -62,6 +62,14 @@
   .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .45em 0 0; }
   .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
   .gdpr { text-align: center; color: var(--rose); font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
+  /* "vill du ha appen till ditt event" - langst ner, egen avgransning */
+  .promo { margin: 26px auto 0; padding-top: 18px; border-top: 1px solid var(--line);
+    max-width: 34ch; text-align: center; font-size: .76rem; line-height: 1.5; color: var(--rose); }
+  .promo a { display: inline-block; margin-top: 4px; padding: 9px 6px 7px; color: var(--gold);
+    font-weight: 600; text-decoration: none; }
+  .promo a span { border-bottom: 1px solid rgba(185,166,140,.45); padding-bottom: 1px; }
+  .promo a:hover span { border-bottom-color: var(--ink); }
+  .promo a:hover { color: var(--ink); border-bottom-color: var(--ink); }
   .lede { text-align: center; color: var(--rose); max-width: 32ch; margin: 0 auto 28px; font-size: .95rem; }
   .btn { display: block; width: 100%; border: 0; cursor: pointer; font-family: 'Poppins'; font-size: .98rem; font-weight: 500; letter-spacing: .02em; padding: 16px 20px; border-radius: 999px; background: var(--ink); color: var(--on-light); box-shadow: var(--shadow); transition: transform .12s ease, background .2s; }
   .btn:active { transform: scale(.97); }
@@ -214,6 +222,11 @@
       <div class="body" id="addhomeBody"></div>
     </details>
     <p class="gdpr">Bilderna hanteras på uppdrag av Properties &amp; Partners, delas med företaget och raderas 30 dagar efter kickoffen. Deltagandet är frivilligt.</p>
+    <p class="promo">
+      Tyckte du om appen och vill anv&auml;nda den p&aring; ditt eget event &mdash;
+      br&ouml;llop, fest eller kickoff?
+      <a href="mailto:adrian.duveholt@gmail.com?subject=Fotobingo%20till%20mitt%20event"><span>H&ouml;r av dig till Adrian</span></a>
+    </p>
   </section>
   <section id="view-tables" class="view">
     <div class="topbar bare"><button class="back" onclick="show('landing')" aria-label="Tillbaka till startsidan">&larr;</button></div>
