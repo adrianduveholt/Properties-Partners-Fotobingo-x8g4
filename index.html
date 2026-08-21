@@ -110,9 +110,13 @@
   .tile .num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--plum); line-height: 1; }
   .tile .lbl { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rose); }
   .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-  .back { border: 0; background: none; font-size: 1.4rem; cursor: pointer; color: var(--plum); padding: 4px 8px; border-radius: 10px; }
+  /* min 44x44 traffyta - pilen ser lika stor ut, men gar att traffa med tummen */
+  .back { border: 0; background: none; font-size: 1.4rem; cursor: pointer; color: var(--plum);
+    padding: 4px 8px; border-radius: 10px; min-width: 44px; min-height: 44px;
+    display: inline-flex; align-items: center; justify-content: center; }
   .topbar .ttl { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.3rem; color: var(--plum); flex: 1; }
   .topbar .wall-link { font-size: .82rem; color: var(--rose); font-weight: 600; cursor: pointer; border: 0; background: none; }
+  .topbar.bare { margin-bottom: 0; }   /* bara bakatpil, rubriken star kvar centrerad under */
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .cell { position: relative; aspect-ratio: 1; border-radius: 14px; overflow: hidden; background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); cursor: pointer; display: block; transition: transform .12s ease; }
   .cell:active { transform: scale(.96); }
@@ -212,6 +216,7 @@
     <p class="gdpr">Bilderna hanteras på uppdrag av Properties &amp; Partners, delas med företaget och raderas 30 dagar efter kickoffen. Deltagandet är frivilligt.</p>
   </section>
   <section id="view-tables" class="view">
+    <div class="topbar bare"><button class="back" onclick="show('landing')" aria-label="Tillbaka till startsidan">&larr;</button></div>
     <div class="section-head"><h2>Vilket lag är ni?</h2><p>Tryck p&aring; ert lag</p></div>
     <div id="tableGrid" class="tables"></div>
     <div class="btn-pair"><button class="btn ghost" onclick="show('teams')">Se lagindelning</button></div>
