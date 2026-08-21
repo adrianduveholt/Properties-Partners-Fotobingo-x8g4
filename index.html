@@ -446,10 +446,10 @@
     ["13.15", "Ordna Bolån", null],
     ["13.30", "Stegman Juristbyrå", null],
     ["13.45", "Prisutdelning", null],
-    ["14.00", "Hatt et Söner — champagneprovning & snack", null],
+    ["14.00", "Hatt et Söner — champagneprovning & snack", 0],
     ["14.30", "Nyckelutdelning och incheckning på rummen", null],
     ["15.00", "Eftermiddagsfika i Herrgården", null],
-    ["15.30", "Tävlingar & mingel med våra partners på Terassen", 0],
+    ["15.30", "Tävlingar & mingel med våra partners på Terassen", null],
     ["17.00", "Bubbles & Oysters på Terassen — värd Cetti", 1],
     ["17.45", "Fri tid: sjöbastu, relax, bad", null],
     ["19.30", "Välkomstdrink, middag & fest — prisutdelning & aktiviteter", 2],
@@ -467,7 +467,7 @@
   // (TASKS.length / ROW_SIZE = 4). Satt tiden nar raden ska bli synlig.
   // Tom strang eller null = raden ar oppen direkt.
   const ROW_UNLOCKS = [
-    "2026-08-24T15:30:00+02:00",   // Rad 1 - Tavlingar & mingel pa Terassen
+    "2026-08-24T14:00:00+02:00",   // Rad 1 - slapps nar brickan oppnar
     "2026-08-24T17:00:00+02:00",   // Rad 2 - Bubbles & Oysters pa Terassen
     "2026-08-24T19:30:00+02:00",   // Rad 3 - Middag
     "2026-08-24T21:00:00+02:00"    // Rad 4 - Fest
@@ -477,7 +477,7 @@
   // Nar lagindelningen och bingobrickan blir tillgangliga. Innan dess visas
   // bara dagens schema, spontanbilder och spontanligan. Satt till tom strang
   // for att ha allt oppet direkt. PREVIEW_ALL slar igenom aven har.
-  const REVEAL_AT = "2026-08-24T15:30:00+02:00";
+  const REVEAL_AT = "2026-08-24T14:00:00+02:00";
   // =======================================
   let currentTable = null, lastView = 'landing', pollTimer = null, feed = [], pendingUploads = [];
   const OVERLAY_VIEWS = ['wall', 'schedule', 'teams', 'person', 'liga'];
