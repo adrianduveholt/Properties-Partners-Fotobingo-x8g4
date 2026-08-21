@@ -1,0 +1,32 @@
+{
+  "name": "Properties & Partners — Fotobingo",
+  "short_name": "P&P Fotobingo",
+  "description": "Fotobingo för Properties & Partners kickoff på Tammsvik 24–25 augusti 2026.",
+  "lang": "sv",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e1012",
+  "theme_color": "#0e1012",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
