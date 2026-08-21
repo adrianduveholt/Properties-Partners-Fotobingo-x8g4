@@ -62,6 +62,47 @@
   .venue { text-align: center; font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--rose); margin: .45em 0 0; }
   .rule { display: block; width: 64px; height: 1px; background: var(--gold); border: 0; margin: 20px auto 22px; }
   .gdpr { text-align: center; color: var(--rose); font-size: .7rem; line-height: 1.45; margin: 18px auto 0; max-width: 34ch; }
+  /* laget innan lagindelning/bricka slappts */
+  .locknote { margin: 14px auto 0; max-width: 34ch; text-align: center; font-size: .78rem;
+    line-height: 1.5; color: var(--rose); border: 1px dashed var(--line); border-radius: 12px; padding: 12px 14px; }
+  .locknote b { color: var(--ink); font-weight: 600; }
+  .whoami { text-align: center; font-size: .76rem; color: var(--rose); margin: 14px 0 0; }
+  .whoami b { color: var(--ink); font-weight: 600; }
+  .whoami button { border: 0; background: none; color: var(--gold); font: inherit; font-weight: 600;
+    cursor: pointer; padding: 6px 4px; text-decoration: underline; }
+  .btn.spontan { display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+  .btn.spontan input { display: none; }
+
+  /* personval */
+  .search { width: 100%; margin: 0 0 12px; padding: 13px 14px; border-radius: 999px;
+    border: 1.5px solid var(--line); background: var(--card); color: var(--ink);
+    font-family: 'Poppins', sans-serif; font-size: .92rem; }
+  .search::placeholder { color: var(--rose); }
+  .person-row { display: block; width: 100%; text-align: left; border: 1px solid var(--line);
+    background: var(--card); color: var(--ink); border-radius: 12px; padding: 12px 14px;
+    margin-bottom: 8px; font-family: 'Poppins', sans-serif; font-size: .92rem; cursor: pointer;
+    min-height: 44px; transition: transform .12s ease; }
+  .person-row:active { transform: scale(.98); }
+  .person-row.sel { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+  .person-row .org { color: var(--rose); font-size: .78rem; }
+  .person-empty { text-align: center; color: var(--rose); font-size: .82rem; padding: 24px 0; }
+
+  /* spontanligan */
+  .liga-row { display: grid; grid-template-columns: 34px 1fr auto; gap: 12px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 11px 14px; margin-bottom: 8px; }
+  .liga-row.top1 { border-color: var(--gold); }
+  .liga-row .pl { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.15rem;
+    color: var(--rose); text-align: center; font-variant-numeric: tabular-nums; }
+  .liga-row.top1 .pl { color: var(--gold); }
+  .liga-row .nm { font-size: .9rem; line-height: 1.3; }
+  .liga-row .nm .org { color: var(--rose); font-size: .76rem; }
+  .liga-row .ct { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem;
+    color: var(--ink); font-variant-numeric: tabular-nums; }
+  .liga-row .ct small { font-size: .48em; font-weight: 600; color: var(--rose); display: block;
+    text-align: right; letter-spacing: .1em; text-transform: uppercase; }
+  .liga-me { border-color: var(--gold); }
+
   /* "vill du ha appen till ditt event" - langst ner, egen avgransning */
   .promo { margin: 26px auto 0; padding-top: 18px; border-top: 1px solid var(--line);
     max-width: 34ch; text-align: center; font-size: .76rem; line-height: 1.5; color: var(--rose); }
@@ -211,12 +252,28 @@
     <p class="venue">Tammsvik &middot; 24–25 augusti 2026</p>
     <hr class="rule">
     <p class="lede">Till fotobingo, l&ouml;s uppgifterna och fyll er bricka. Alla bilder samlas p&aring; den gemensamma v&auml;ggen.</p>
-    <button class="btn" onclick="show('tables')">Till fotobingo</button>
-    <button class="btn ghost" onclick="openWall()">Se bildv&auml;ggen</button>
-    <div class="btn-pair">
-      <button class="btn ghost" onclick="show('schedule')">Dagens schema</button>
-      <button class="btn ghost" onclick="show('teams')">Lagindelning</button>
+    <div id="preReveal">
+      <label class="btn spontan" id="spontanBtn">&#x2728; Ta en spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadSpontan(this)"></label>
+      <button class="btn ghost" id="pickPersonBtn" onclick="show('person')">V&auml;lj vem du &auml;r</button>
+      <div class="btn-pair">
+        <button class="btn ghost" onclick="show('schedule')">Dagens schema</button>
+        <button class="btn ghost" onclick="show('liga')">Spontanligan</button>
+      </div>
+      <p class="locknote" id="lockNote"></p>
     </div>
+    <div id="postReveal" style="display:none">
+      <button class="btn" onclick="show('tables')">Till fotobingo</button>
+      <button class="btn ghost" onclick="openWall()">Se bildv&auml;ggen</button>
+      <div class="btn-pair">
+        <button class="btn ghost" onclick="show('schedule')">Dagens schema</button>
+        <button class="btn ghost" onclick="show('teams')">Lagindelning</button>
+      </div>
+      <div class="btn-pair">
+        <label class="btn ghost spontan">&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadSpontan(this)"></label>
+        <button class="btn ghost" onclick="show('liga')">Spontanligan</button>
+      </div>
+    </div>
+    <p class="whoami" id="whoami"></p>
     <details class="addhome">
       <summary>&#x1F4F1; L&auml;gg appen p&aring; hemsk&auml;rmen</summary>
       <div class="body" id="addhomeBody"></div>
@@ -244,6 +301,17 @@
       <label>&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
     </div>
     <p class="footnote">Tryck p&aring; en ruta &rarr; kameran &ouml;ppnas &rarr; fotot fyller brickan och hamnar p&aring; v&auml;ggen.<br>Ta g&auml;rna <strong>flera bilder p&aring; samma uppgift</strong> &mdash; ju fler desto roligare!</p>
+  </section>
+  <section id="view-person" class="view">
+    <div class="topbar"><button class="back" onclick="show('landing')" aria-label="Tillbaka">&larr;</button><span class="ttl">Vem &auml;r du?</span></div>
+    <p class="sched-note">S&aring; vet vi vems spontanbilder som &auml;r vems.</p>
+    <input class="search" id="personSearch" type="search" placeholder="S&ouml;k ditt namn" oninput="renderPersonList()" autocomplete="off">
+    <div id="personList"></div>
+  </section>
+  <section id="view-liga" class="view">
+    <div class="topbar"><button class="back" onclick="show(lastView)" aria-label="Tillbaka">&larr;</button><span class="ttl">Spontanligan</span></div>
+    <p class="sched-note">Flest spontanbilder under dagen.</p>
+    <div id="ligaList"></div>
   </section>
   <section id="view-schedule" class="view">
     <div class="topbar"><button class="back" onclick="show(lastView)">&larr;</button><span class="ttl">Dagens schema</span></div>
@@ -356,24 +424,24 @@
     return t ? t.name : String(id);
   }
   const TASKS = [
-    // Rad 1 - 09.30 Ankomst & konferens
-    "Någon du inte jobbat med i år", "Bästa handslaget", "Ankomstkaffet ☕",
-    // Rad 2 - 12.00 Lunch & dagpass
-    "Herrgården i bakgrunden", "Någon mitt i sitt bästa säljargument", "Något vid vattnet",
-    // Rad 3 - 15.30 Tävlingar & mingel på Terassen
-    "Laget mitt i en tävling", "En skål på Terassen 🥂", "Någon från en av våra partners",
-    // Rad 4 - 19.30 Middag & fest
+    // Rad 1 - 15.30 Tävlingar & mingel på Terassen
+    "Någon du inte jobbat med i år", "Bästa handslaget", "Laget mitt i en tävling",
+    // Rad 2 - 17.00 Bubbles & Oysters
+    "En skål på Terassen 🥂", "Någon från en av våra partners", "Herrgården i bakgrunden",
+    // Rad 3 - 19.30 Middag
+    "Dukningen innan någon rört den", "Någon mitt i sitt bästa säljargument", "Kvällens bästa tal",
+    // Rad 4 - 21.00 Fest
     "Hela laget i en bild", "Kvällens bästa dansmove", "Sista skålen 🍻"
   ];
   // Dagens schema (mandag 24/8). rad = vilken bingorad som slapps har, annars null.
   const SCHEMA = [
-    ["09.30", "Registrering, ankomstkaffe & smörgås", 0],
+    ["09.30", "Registrering, ankomstkaffe & smörgås", null],
     ["10.30", "Konferensstart i Mälarhallen", null],
     ["10.40", "Genomgång/upptakt", null],
     ["11.00", "Wrap up om utveckling", null],
     ["11.15", "Sustera Real Estate", null],
     ["11.40", "Prisutdelning", null],
-    ["12.00", "Lunch i Herrgården", 1],
+    ["12.00", "Lunch i Herrgården", null],
     ["13.00", "Återsamling i Mälarhallen", null],
     ["13.15", "Ordna Bolån", null],
     ["13.30", "Stegman Juristbyrå", null],
@@ -381,10 +449,11 @@
     ["14.00", "Hatt et Söner — champagneprovning & snack", null],
     ["14.30", "Nyckelutdelning och incheckning på rummen", null],
     ["15.00", "Eftermiddagsfika i Herrgården", null],
-    ["15.30", "Tävlingar & mingel med våra partners på Terassen", 2],
-    ["17.00", "Bubbles & Oysters på Terassen — värd Cetti", null],
+    ["15.30", "Tävlingar & mingel med våra partners på Terassen", 0],
+    ["17.00", "Bubbles & Oysters på Terassen — värd Cetti", 1],
     ["17.45", "Fri tid: sjöbastu, relax, bad", null],
-    ["19.30", "Välkomstdrink, middag & fest — prisutdelning & aktiviteter", 3]
+    ["19.30", "Välkomstdrink, middag & fest — prisutdelning & aktiviteter", 2],
+    ["21.00", "Sista bingoraden släpps", 3]
   ];
   const POLL_MS = 4000;
 
@@ -398,15 +467,20 @@
   // (TASKS.length / ROW_SIZE = 4). Satt tiden nar raden ska bli synlig.
   // Tom strang eller null = raden ar oppen direkt.
   const ROW_UNLOCKS = [
-    "2026-08-24T09:30:00+02:00",   // Rad 1 - Registrering & ankomstkaffe
-    "2026-08-24T12:00:00+02:00",   // Rad 2 - Lunch i Herrgarden
-    "2026-08-24T15:30:00+02:00",   // Rad 3 - Tavlingar & mingel pa Terassen
-    "2026-08-24T19:30:00+02:00"    // Rad 4 - Middag & fest
+    "2026-08-24T15:30:00+02:00",   // Rad 1 - Tavlingar & mingel pa Terassen
+    "2026-08-24T17:00:00+02:00",   // Rad 2 - Bubbles & Oysters pa Terassen
+    "2026-08-24T19:30:00+02:00",   // Rad 3 - Middag
+    "2026-08-24T21:00:00+02:00"    // Rad 4 - Fest
   ];
   const ROW_SIZE = 3;                  // uppgifter per rad
+
+  // Nar lagindelningen och bingobrickan blir tillgangliga. Innan dess visas
+  // bara dagens schema, spontanbilder och spontanligan. Satt till tom strang
+  // for att ha allt oppet direkt. PREVIEW_ALL slar igenom aven har.
+  const REVEAL_AT = "2026-08-24T15:30:00+02:00";
   // =======================================
   let currentTable = null, lastView = 'landing', pollTimer = null, feed = [], pendingUploads = [];
-  const OVERLAY_VIEWS = ['wall', 'schedule', 'teams'];
+  const OVERLAY_VIEWS = ['wall', 'schedule', 'teams', 'person', 'liga'];
   function show(name) {
     if (OVERLAY_VIEWS.indexOf(name) === -1) lastView = name;
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -418,7 +492,131 @@
     if (name === 'tables') markFullTablesInPicker();
     if (name === 'schedule') renderSchedule();
     if (name === 'teams') renderTeams();
+    if (name === 'person') renderPersonList();
+    if (name === 'liga') renderLiga();
+    if (name === 'landing') renderLanding();
   }
+
+  // ----- Valkomstskarmen: fore eller efter att lag/bricka slappts -----
+  function renderLanding() {
+    const oppet = isRevealed();
+    const pre = document.getElementById('preReveal');
+    const post = document.getElementById('postReveal');
+    if (pre) pre.style.display = oppet ? 'none' : 'block';
+    if (post) post.style.display = oppet ? 'block' : 'none';
+
+    // spontanbild kraver att man valt vem man ar
+    const sp = document.getElementById('spontanBtn');
+    const pick = document.getElementById('pickPersonBtn');
+    if (sp && pick) {
+      const harPerson = !!(myPerson && personById(myPerson));
+      sp.style.display = harPerson ? 'flex' : 'none';
+      pick.style.display = harPerson ? 'none' : 'block';
+      pick.className = harPerson ? 'btn ghost' : 'btn';
+    }
+
+    const note = document.getElementById('lockNote');
+    if (note) {
+      const t = revealMs();
+      const dolt = oppet || t === null;
+      note.innerHTML = dolt ? '' :
+        'Lagindelning och bingobricka öppnar <b>' + fmtTime(t) + '</b>.<br>' +
+        'Till dess: ta spontanbilder och kika på schemat.';
+      note.style.display = dolt ? 'none' : 'block';
+    }
+    renderWhoami();
+  }
+
+  function renderWhoami() {
+    const el = document.getElementById('whoami');
+    if (!el) return;
+    const p = myPerson && personById(myPerson);
+    if (!p) { el.innerHTML = ''; return; }
+    el.innerHTML = 'Du är <b>' + esc(p.name) + '</b> <button type="button" data-byt="1">byt</button>';
+  }
+
+  // ----- Vem ar du -----
+  // Visar INTE lagtillhorighet fore reveal; da hade lagindelningen lackt harifran.
+  function renderPersonList() {
+    const el = document.getElementById('personList');
+    if (!el) return;
+    const inp = document.getElementById('personSearch');
+    const q = inp ? inp.value : '';
+    const nq = q.trim().toLowerCase();
+    const visaLag = isRevealed();
+    const lista = PEOPLE
+      .filter(function (p) { return !nq || p.name.toLowerCase().indexOf(nq) !== -1; })
+      .sort(function (a, b) { return a.name.localeCompare(b.name, 'sv'); });
+    if (!lista.length) {
+      el.innerHTML = '<p class="person-empty">Ingen träff på ' + esc(q) + '</p>';
+      return;
+    }
+    el.innerHTML = lista.map(function (p) {
+      const extra = [p.org, visaLag ? p.teamName : ''].filter(Boolean).join(' · ');
+      return '<button type="button" class="person-row' + (p.id === myPerson ? ' sel' : '') +
+             '" data-person="' + p.id + '">' + esc(p.name) +
+             (extra ? ' <span class="org">' + esc(extra) + '</span>' : '') + '</button>';
+    }).join('');
+  }
+  function valjPerson(id) {
+    const p = personById(id);
+    if (!p) return;
+    setMyPerson(id);
+    toast('Tack ' + p.name.split(' ')[0] + '! Nu kan du ta spontanbilder');
+    show('landing');
+  }
+
+  // ----- Spontanbild: markt med VEM, aldrig med lag -----
+  function uploadSpontan(inputEl) {
+    const file = inputEl.files && inputEl.files[0];
+    if (!file) return;
+    inputEl.value = '';
+    if (!myPerson || !personById(myPerson)) { show('person'); return; }
+    toast('Skickar…');
+    uploadPhoto(file, 'gemensam', 101, null, myPerson);
+  }
+
+  // ----- Spontanligan -----
+  function renderLiga() {
+    const el = document.getElementById('ligaList');
+    if (!el) return;
+    const per = {};
+    let utanVem = 0;
+    feed.forEach(function (f) {
+      if (Number(f.taskIndex) !== 101) return;
+      if (f.who) per[f.who] = (per[f.who] || 0) + 1; else utanVem++;
+    });
+    const rader = Object.keys(per).map(function (w) {
+      const p = personById(w);
+      return { id: w, namn: p ? p.name : w, org: p ? p.org : '', antal: per[w] };
+    }).sort(function (a, b) { return b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'); });
+
+    const fot = utanVem
+      ? '<p class="person-empty">' + utanVem + (utanVem === 1 ? ' spontanbild' : ' spontanbilder') +
+        ' saknar avsändare och kan inte räknas.</p>'
+      : '';
+    if (!rader.length) {
+      el.innerHTML = '<p class="person-empty">Inga spontanbilder än.</p>' + fot;
+      return;
+    }
+    el.innerHTML = rader.map(function (r, i) {
+      return '<div class="liga-row' + (i === 0 ? ' top1' : '') +
+               (r.id === myPerson ? ' liga-me' : '') + '">' +
+               '<div class="pl">' + (i + 1) + '</div>' +
+               '<div class="nm">' + esc(r.namn) +
+                 (r.org ? '<span class="org"> · ' + esc(r.org) + '</span>' : '') + '</div>' +
+               '<div class="ct">' + r.antal + '<small>' + (r.antal === 1 ? 'bild' : 'bilder') + '</small></div>' +
+             '</div>';
+    }).join('') + fot;
+  }
+
+  // klick pa genererade rader (ingen inline-onclick i genererad HTML)
+  document.addEventListener('click', function (ev) {
+    const pr = ev.target.closest ? ev.target.closest('[data-person]') : null;
+    if (pr) { valjPerson(pr.getAttribute('data-person')); return; }
+    const byt = ev.target.closest ? ev.target.closest('[data-byt]') : null;
+    if (byt) { show('person'); }
+  });
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -536,6 +734,40 @@
     renderCard(); show('card'); refreshFeed();
   }
   // ===== Upplasning over tid =====
+  // Platt deltagarlista harledd ur TEAMS. id = t<lag>m<nr> - kort, stabilt och
+  // avslojar inget namn, sa filnamnen i Drive innehaller inga personuppgifter.
+  const PEOPLE = [];
+  TEAMS.forEach(function (t) {
+    (t.members || []).forEach(function (m, i) {
+      PEOPLE.push({ id: t.id + 'm' + (i + 1), name: m[0], org: m[1] || '', team: t.id, teamName: t.name });
+    });
+  });
+  function personById(id) {
+    for (var i = 0; i < PEOPLE.length; i++) if (PEOPLE[i].id === id) return PEOPLE[i];
+    return null;
+  }
+
+  // ----- Vem ar jag (sparas lokalt, behovs for spontanligan) -----
+  const PERSON_KEY = 'fotobingo_person_pp2026';
+  let myPerson = null;
+  try { myPerson = localStorage.getItem(PERSON_KEY) || null; } catch (e) {}
+  function setMyPerson(id) {
+    myPerson = id;
+    try { localStorage.setItem(PERSON_KEY, id); } catch (e) {}
+  }
+
+  // ----- Ar lagindelning + bricka upplasta an? -----
+  function revealMs() {
+    if (!REVEAL_AT) return null;
+    const t = new Date(REVEAL_AT).getTime();
+    return isNaN(t) ? null : t;
+  }
+  function isRevealed() {
+    if (PREVIEW_ALL) return true;
+    const t = revealMs();
+    return t === null || Date.now() >= t;
+  }
+
   function totalRows() { return Math.ceil(TASKS.length / ROW_SIZE); }
   // Tidpunkten da rad nr rowIdx (0-baserad) oppnar. null = ingen tid satt.
   function rowUnlockMs(rowIdx) {
@@ -613,18 +845,18 @@
       grid.appendChild(label);
     });
   }
-  async function uploadPhoto(file, table, taskIndex, pendingItem) {
+  async function uploadPhoto(file, table, taskIndex, pendingItem, who) {
     if (!API_URL) { toast('Demo-l\u00e4ge: ingen server kopplad \u00e4n'); removePending(pendingItem); return; }
     try {
       const dataUrl = await compressImage(file);
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ table, taskIndex, task: taskLabel(taskIndex), image: dataUrl, filename: file.name })
+        body: JSON.stringify({ table, taskIndex, task: taskLabel(taskIndex), image: dataUrl, filename: file.name, who: who || null })
       });
       const out = await res.json();
       if (out && out.ok && out.url) {
-        feed.push({ id: out.id, table, taskIndex, url: out.url, ts: Date.now() });
+        feed.push({ id: out.id, table, taskIndex, url: out.url, ts: Date.now(), who: who || null });
         removePending(pendingItem, true);
         if (canShareFile(file)) toast('Bidrag tillagt! \ud83c\udf89', 'Spara till mobilen', () => shareFile(file), 6000);
         else toast('Bidrag tillagt! \ud83c\udf89');
@@ -795,6 +1027,10 @@
   }, 20000);
   function startPolling() { stopPolling(); pollTimer = setInterval(refreshFeed, POLL_MS); }
   function stopPolling() { if (pollTimer) clearInterval(pollTimer); pollTimer = null; }
+
+  // Valkomstskarmen ar aktiv fran start. Maste ligga SIST - den laser PEOPLE
+  // och myPerson, som deklareras langre upp med const/let.
+  renderLanding();
 </script>
 </body>
 </html>

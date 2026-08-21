@@ -111,6 +111,20 @@
   .pcap .b { font-size:clamp(.7rem,1vw,.95rem); color:var(--paper-sub); text-transform:uppercase; letter-spacing:.1em; font-weight:700; margin-top:.25em; transition:opacity .35s ease; }
   .pcap.fade .t, .pcap.fade .b { opacity:0; }
 
+  /* Spontanligan - smal rad under leaderboarden, syns bara nar det finns data */
+  .spontan-bar { flex:none; display:none; margin-top:1vh; padding:.9vh 1.6vw;
+    background:var(--card); border:1px solid var(--gold); border-radius:14px;
+    display:none; align-items:center; gap:.8vw; }
+  .spontan-bar.on { display:flex; }
+  .spontan-bar .ico { font-size:clamp(1rem,2.4vh,1.7rem); flex:none; }
+  .spontan-bar .lbl { font-size:clamp(.6rem,1.3vh,.9rem); letter-spacing:.14em;
+    text-transform:uppercase; color:var(--rose); font-weight:600; flex:none; }
+  .spontan-bar .who { font-family:'Cormorant Garamond',serif; font-weight:700;
+    font-size:clamp(1rem,3vh,2.1rem); color:var(--ink); flex:1; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .spontan-bar .n { font-family:'Cormorant Garamond',serif; font-weight:700;
+    font-size:clamp(1rem,3vh,2.1rem); color:var(--gold); flex:none;
+    font-variant-numeric:tabular-nums; }
   .empty { color:var(--rose); padding:30px 0; text-align:center; }
   .pulse { position:fixed; bottom:2vh; right:2vw; font-size:.8rem; color:#6d6862; }
 </style>
@@ -126,6 +140,12 @@
     <section>
       <div class="panel-title">🏆 Lag</div>
       <div id="board"><p class="empty">Väntar på poäng…</p></div>
+      <div class="spontan-bar" id="spontanBar">
+        <span class="ico">✨</span>
+        <span class="lbl">Flest spontanbilder</span>
+        <span class="who" id="spontanWho"></span>
+        <span class="n" id="spontanN"></span>
+      </div>
     </section>
     <section>
       <div class="panel-title">📸 Från kvällen</div>
@@ -165,13 +185,13 @@
   // Samma /exec-URL som i index.html:
   const API_URL = "https://script.google.com/macros/s/AKfycbz20r6ey40S7co1zVwu9b8j-XIDK54qIij765GAXcz5CcXC2gIFkAzNAgc1KWK_6Vx9/exec"; // <-- samma /exec-URL som i index.html // <-- SAMMA /exec-URL som i index.html
   const TASKS = [
-    // Rad 1 - 09.30 Ankomst & konferens
-    "Någon du inte jobbat med i år", "Bästa handslaget", "Ankomstkaffet ☕",
-    // Rad 2 - 12.00 Lunch & dagpass
-    "Herrgården i bakgrunden", "Någon mitt i sitt bästa säljargument", "Något vid vattnet",
-    // Rad 3 - 15.30 Tävlingar & mingel på Terassen
-    "Laget mitt i en tävling", "En skål på Terassen 🥂", "Någon från en av våra partners",
-    // Rad 4 - 19.30 Middag & fest
+    // Rad 1 - 15.30 Tävlingar & mingel på Terassen
+    "Någon du inte jobbat med i år", "Bästa handslaget", "Laget mitt i en tävling",
+    // Rad 2 - 17.00 Bubbles & Oysters
+    "En skål på Terassen 🥂", "Någon från en av våra partners", "Herrgården i bakgrunden",
+    // Rad 3 - 19.30 Middag
+    "Dukningen innan någon rört den", "Någon mitt i sitt bästa säljargument", "Kvällens bästa tal",
+    // Rad 4 - 21.00 Fest
     "Hela laget i en bild", "Kvällens bästa dansmove", "Sista skålen 🍻"
   ];
   // Samma lista som i index.html - hall dem identiska.
@@ -255,6 +275,18 @@
       ["Masood Selab", "Propmind"]
     ] }
   ];
+  // Platt deltagarlista, samma harledning som i index.html: id = t<lag>m<nr>
+  const PEOPLE = [];
+  TEAMS.forEach(function (t) {
+    (t.members || []).forEach(function (m, i) {
+      PEOPLE.push({ id: t.id + 'm' + (i + 1), name: m[0], org: m[1] || '' });
+    });
+  });
+  function personName(id) {
+    for (var i = 0; i < PEOPLE.length; i++) if (PEOPLE[i].id === id) return PEOPLE[i].name;
+    return String(id);
+  }
+
   function teamName(id) {
     const t = TEAMS.find(x => x.id === String(id));
     return t ? t.name : String(id);
@@ -278,6 +310,7 @@
         if (j !== lastScoresJson) { lastScoresJson = j; renderBoard(out.scores); }
       }
       if (out.items) renderPhotos(out.items);
+      renderSpontan(out.spontan, out.items);
     } catch (e) {}
   }
 
@@ -363,6 +396,30 @@
   }
   function preload(url) {
     return new Promise(res => { const im = new Image(); im.onload = im.onerror = () => res(url); im.src = url; });
+  }
+
+  // Visar ledaren i spontanligan. Foredrar serverns berakning, faller tillbaka
+  // pa att rakna ur items sa raden funkar aven mot en aldre backend-version.
+  function renderSpontan(spontan, items) {
+    const bar = document.getElementById('spontanBar');
+    if (!bar) return;
+    let rader = (spontan && spontan.rows) ? spontan.rows.slice() : null;
+    if (!rader) {
+      const per = {};
+      (items || []).forEach(function (it) {
+        if (Number(it.taskIndex) !== 101 || !it.who) return;
+        per[it.who] = (per[it.who] || 0) + 1;
+      });
+      rader = Object.keys(per).map(function (w) { return { who: w, count: per[w] }; })
+                    .sort(function (a, b) { return b.count - a.count; });
+    }
+    if (!rader.length) { bar.classList.remove('on'); return; }
+    const b = rader[0];
+    const delad = rader.filter(function (r) { return r.count === b.count; });
+    document.getElementById('spontanWho').textContent =
+      delad.length > 1 ? (delad.length + ' delar ledningen') : personName(b.who);
+    document.getElementById('spontanN').textContent = b.count;
+    bar.classList.add('on');
   }
 
   function renderPhotos(items) {
