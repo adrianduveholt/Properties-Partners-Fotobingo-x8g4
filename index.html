@@ -326,7 +326,7 @@
     <div id="bingoGrid" class="grid"></div>
     <div class="extra-actions">
       <label>&#x1F4F7; Ta en lagbild!<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 100)"></label>
-      <label>&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
+      <label>&#x2728; Spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadSpontan(this)"></label>
     </div>
     <p class="footnote">Tryck p&aring; en ruta &rarr; kameran &ouml;ppnas &rarr; fotot fyller brickan och hamnar p&aring; v&auml;ggen.<br>Ta g&auml;rna <strong>flera bilder p&aring; samma uppgift</strong> &mdash; ju fler desto roligare!</p>
   </section>
@@ -363,7 +363,7 @@
   </section>
 </div>
 <div class="float-action" id="floatSpontan">
-  <label>&#x2728; Ta en spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadExtra(this, 101)"></label>
+  <label>&#x2728; Ta en spontanbild<input type="file" accept="image/*" capture="environment" onchange="uploadSpontan(this)"></label>
 </div>
 <div id="lightbox" onclick="closeLightbox()"><button class="lb-close" aria-label="St&auml;ng">&#x2715;</button><button class="lb-save" onclick="event.stopPropagation(); saveFromLightbox()">&#x1F4E5; Spara</button><img id="lbImg" alt=""><div class="lb-cap"><div class="t" id="lbTitle"></div><div class="b" id="lbTable"></div></div></div>
 <div id="toast" class="toast"></div>
@@ -605,7 +605,14 @@
     const file = inputEl.files && inputEl.files[0];
     if (!file) return;
     inputEl.value = '';
-    if (!myPerson || !personById(myPerson)) { show('person'); return; }
+    uploadSpontan2(file);
+  }
+  function uploadSpontan2(file) {
+    if (!myPerson || !personById(myPerson)) {
+      toast('Välj först vem du är, så hamnar bilden på dig');
+      show('person');
+      return;
+    }
     toast('Skickar…');
     uploadPhoto(file, 'gemensam', 101, null, myPerson);
   }
@@ -961,9 +968,13 @@
     return TASKS[i] || '';
   }
   // Bordsbild/spontanbild \u2014 samma uppladdningsfl\u00f6de, eget taskIndex utanf\u00f6r po\u00e4ngr\u00e4kningen
+  // Lagbild (taskIndex 100): ger lagpoang men raknas inte som lost uppgift.
+  // Spontanbilder gar ALLTID via uploadSpontan2 - de tillhor den enskilda
+  // tavlingen och ska inte ge lagpoang.
   function uploadExtra(inputEl, taskIndex) {
     const file = inputEl.files && inputEl.files[0]; if (!file) return;
     inputEl.value = '';
+    if (Number(taskIndex) === 101) { uploadSpontan2(file); return; }
     const table = currentTable || 'gemensam';
     toast('Skickar\u2026 \ud83d\udce4');
     uploadPhoto(file, table, taskIndex, null);
